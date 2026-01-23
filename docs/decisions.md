@@ -1,6 +1,6 @@
-# Decisions — Landing Zone Lite (Azure)
+# Decisions — Azure Landing Zone
 
-Dokument opisuje kluczowe decyzje architektoniczne i operacyjne dla projektu **Landing Zone Lite**.
+Dokument opisuje kluczowe decyzje architektoniczne i operacyjne dla projektu **Azure Landing Zone**.
 Celem jest stworzenie powtarzalnego fundamentu (governance + monitoring + cost controls + RBAC) pod wdrażanie workloadów w Azure.
 
 ---
@@ -12,7 +12,7 @@ Celem jest stworzenie powtarzalnego fundamentu (governance + monitoring + cost c
 - Konfiguracja “platform foundation”: RBAC, Azure Policy, centralne logowanie, kontrola kosztów
 - Deploy w IaC (Bicep) + skrypty PowerShell (deploy/validate/cleanup)
 
-**Poza zakresem (świadomie nie robione w Lite):**
+**Poza zakresem (świadomie nie robione):**
 - Management Groups (Enterprise-scale) i rozdział na wiele subskrypcji
 - Pełny networking baseline (hub-spoke, firewall, vWAN) — będzie osobnym projektem
 - SIEM/SOAR (Sentinel), Defender for Cloud “hardening” — osobny projekt
@@ -28,18 +28,18 @@ Celem jest stworzenie powtarzalnego fundamentu (governance + monitoring + cost c
 
 ## 2. Naming i tagowanie
 
-**Project code:** `lzlite`  
-**Environment:** `dev`
+**Project code:** `alz`  
+**Environment:** `dev | prod`
 
 **Standard nazw Resource Groups:**
-- `rg-lzlite-dev-monitor`
-- `rg-lzlite-dev-shared`
-- `rg-lzlite-dev-workloads`
+- `rg-alz-dev-monitor`
+- `rg-alz-dev-shared`
+- `rg-alz-dev-workloads`
 
 **Obowiązkowe tagi (minimum):**
-- `Owner` = `<TwojeImięLubAlias>`
-- `Environment` = `dev`
-- `CostCenter` = `LAB`
+- `Owner` = `Sebastian`
+- `Environment` = `dev | prod`
+- `CostCenter` = `LAB | PROD`
 
 **Uzasadnienie:**
 - Tagi umożliwiają kosztowanie (chargeback), filtrowanie zasobów i automatyzację (policy/raporty).
@@ -84,14 +84,14 @@ Celem jest stworzenie powtarzalnego fundamentu (governance + monitoring + cost c
 **Model: RBAC przypisywany do grup Entra ID (nie do kont indywidualnych).**
 
 **Grupy:**
-- `sg-lz-ops` — operacje/utrzymanie
-- `sg-lz-dev` — tworzenie zasobów (lab)
-- `sg-lz-audit` — audyt/odczyt
+- `sg-alz-ops` — operacje/utrzymanie
+- `sg-alz-dev` — tworzenie zasobów (lab)
+- `sg-alz-audit` — audyt/odczyt
 
 **Role (scope: subscription):**
-- `sg-lz-audit` → Reader
-- `sg-lz-ops` → Monitoring Reader + Log Analytics Reader
-- `sg-lz-dev` → Contributor
+- `sg-alz-audit` → Reader
+- `sg-alz-ops` → Monitoring Reader + Log Analytics Reader
+- `sg-alz-dev` → Contributor
 
 **Uzasadnienie:**
 - Uprawnienia przez grupy są skalowalne i audytowalne.

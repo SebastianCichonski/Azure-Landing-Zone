@@ -1,5 +1,4 @@
-# Azure Landing Zone Lite (Portfolio)
-
+# Azure Landing Zone
 **Cel projektu:** zbudowanie lekkiej “landing zone” na jednej subskrypcji Azure, która zapewnia **guardrails (Azure Policy)**, **model uprawnień (RBAC)**, **centralne logowanie (Activity Log → Log Analytics)** oraz **kontrolę kosztów (budżet + alerty)**.
 
 Projekt jest wdrażany w pełni jako **Infrastructure as Code** (Bicep) i zawiera skrypty PowerShell do **deploy/validate/cleanup**.
@@ -7,7 +6,7 @@ Projekt jest wdrażany w pełni jako **Infrastructure as Code** (Bicep) i zawier
 ---
 
 ## Spis treści
-- [Azure Landing Zone Lite (Portfolio)](#azure-landing-zone-lite-portfolio)
+- [Azure Landing Zone](#azure-landing-zone)
   - [Spis treści](#spis-treści)
   - [Co to jest Landing Zone](#co-to-jest-landing-zone)
   - [Architektura](#architektura)
@@ -75,35 +74,35 @@ Diagram: `docs/diagrams/landing-zone-lite.png`
 - Budget na subskrypcji: `bud-<project>-<env>` (progi: 50/80/100)
 
 ### RBAC
-- Role assignments na subskrypcji przypięte do grup Entra ID (`sg-lz-*`)
+- Role assignments na subskrypcji przypięte do grup Entra ID (`sg-alz-*`)
 
 ---
 
 ## Standardy: naming i tagi
-**Project code:** `<np. lzlite>`  
-**Environment:** `<np. dev>`  
-**Region:** `<np. westeurope>`
+**Project code:** `alz`  
+**Environment:** `dev | prod`  
+**Region:** `westeurope`
 
 ### Obowiązkowe tagi
-- `Owner` = `<TwojeImięLubAlias>`
-- `Environment` = `<dev/prod-like>`
-- `CostCenter` = `<LAB>`
+- `Owner` = `Sebastian`
+- `Environment` = `dev | prod`
+- `CostCenter` = `LAB | PROD`
 
 ---
 
 ## RBAC i grupy (Entra ID)
 
 ### Grupy
-- `sg-lz-ops` — operacje/utrzymanie
-- `sg-lz-dev` — tworzenie zasobów (lab)
-- `sg-lz-audit` — audyt/odczyt
+- `sg-alz-ops` — operacje/utrzymanie
+- `sg-alz-dev` — tworzenie zasobów (lab)
+- `sg-alz-audit` — audyt/odczyt
 
 ### Role (scope: subskrypcja)
 | Grupa | Rola | Po co |
 |------|------|-------|
-| `sg-lz-audit` | Reader | Audyt i wgląd bez zmian |
-| `sg-lz-ops` | Monitoring Reader + Log Analytics Reader | Obsługa monitoringu i analizy logów |
-| `sg-lz-dev` | Contributor | Wdrażanie zasobów w labie (kontrolowane przez policy) |
+| `sg-alz-audit` | Reader | Audyt i wgląd bez zmian |
+| `sg-alz-ops` | Monitoring Reader + Log Analytics Reader | Obsługa monitoringu i analizy logów |
+| `sg-alz-dev` | Contributor | Wdrażanie zasobów w labie (kontrolowane przez policy) |
 
 > W labie `Contributor` dla dev jest akceptowalne. W produkcji zwykle stosuje się węższe role + dodatkowe guardrails.
 
@@ -159,7 +158,7 @@ AzureActivity
 ## Kontrola kosztów
 - Budget: `<np. 15>`
 - Progi alertów: 50% / 80% / 100%
-- Odbiorcy powiadomień: `<twoj-email>`
+- Odbiorcy powiadomień: `sebqu@outlook.com`
 
 **Zasady “taniego labu”:**
 - 1 region + policy Allowed locations
@@ -202,7 +201,7 @@ pwsh ./scripts/deploy.ps1   -Location westeurope -ParamsFile ./infra/params/dev.
 
 ## Sprzątanie (cleanup)
 ```powershell
-pwsh ./scripts/cleanup.ps1 -ProjectName <lzlite> -Environment <dev>
+pwsh ./scripts/cleanup.ps1 -ProjectName <alz> -Environment <dev>
 ```
 
 > Cleanup usuwa zasoby wdrożone przez projekt (w tym RG i elementy governance), aby ograniczyć koszty labu.

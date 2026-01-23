@@ -48,14 +48,11 @@ Projekt jest wdrażany w pełni jako **Infrastructure as Code** (Bicep) i zawier
 ## Architektura
 Diagram: `docs/diagrams/landing-zone-lite.png`
 
->
-> ![Landing Zone Lite](docs/diagrams/landing-zone.png)
-> 
 ```mermaid
 flowchart TB
-  A["Tenant / Entra ID"] --> B["Subscription: Landing Zone Lite"]
+  A["Tenant / Entra ID"] --> B["Subscription: Azure Landing Zone"]
 
-  subgraph B["Subscription: Landing Zone Lite"]
+  subgraph B["Subscription: Azure Landing Zone"]
     direction TB
 
     subgraph RG1["RG: Connectivity"]

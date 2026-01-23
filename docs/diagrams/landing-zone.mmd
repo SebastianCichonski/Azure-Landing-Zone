@@ -1,0 +1,39 @@
+flowchart TB
+  A["Tenant / Entra ID"] --> B["Subscription: Azure Landing Zone"]
+
+  subgraph B["Subscription: Azure Landing Zone"]
+    direction TB
+
+    subgraph RG1["RG: Connectivity"]
+      H["Hub VNet"]
+      FW["Firewall / NVA (optional)"]
+      VPN["VPN Gateway (optional)"]
+      H --- FW
+      H --- VPN
+    end
+
+    subgraph RG2["RG: Management"]
+      LA["Log Analytics"]
+      AM["Azure Monitor + Alerts"]
+      DIAG["Diagnostic Settings"]
+      DIAG --> LA
+      AM --> LA
+    end
+
+    subgraph RG3["RG: Identity & Security"]
+      KV["Key Vault"]
+      MI["Managed Identities"]
+      KV --- MI
+    end
+
+    subgraph RG4["RG: Workloads"]
+      S["Spoke VNet"]
+      APP["Workload: VM / App Service / AKS"]
+      S --> APP
+    end
+
+    H <--> S
+  end
+
+  P["Azure Policy / Initiatives"] -.-> B
+  R["RBAC (roles + groups)"] -.-> B

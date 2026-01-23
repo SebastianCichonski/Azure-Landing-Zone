@@ -48,10 +48,51 @@ Projekt jest wdrażany w pełni jako **Infrastructure as Code** (Bicep) i zawier
 ## Architektura
 Diagram: `docs/diagrams/landing-zone-lite.png`
 
-> Wklej tutaj obrazek (GitHub renderuje PNG):
 >
-> ![Landing Zone Lite](docs/diagrams/landing-zone-lite.png)
+> ![Landing Zone Lite](docs/diagrams/landing-zone.png)
+> 
+```mermaid
+flowchart TB
+  A["Tenant / Entra ID"] --> B["Subscription: Landing Zone Lite"]
 
+  subgraph B["Subscription: Landing Zone Lite"]
+    direction TB
+
+    subgraph RG1["RG: Connectivity"]
+      H["Hub VNet"]
+      FW["Firewall / NVA (optional)"]
+      VPN["VPN Gateway (optional)"]
+      H --- FW
+      H --- VPN
+    end
+
+    subgraph RG2["RG: Management"]
+      LA["Log Analytics"]
+      AM["Azure Monitor + Alerts"]
+      DIAG["Diagnostic Settings"]
+      DIAG --> LA
+      AM --> LA
+    end
+
+    subgraph RG3["RG: Identity & Security"]
+      KV["Key Vault"]
+      MI["Managed Identities"]
+      KV --- MI
+    end
+
+    subgraph RG4["RG: Workloads"]
+      S["Spoke VNet"]
+      APP["Workload: VM / App Service / AKS"]
+      S --> APP
+    end
+
+    H <--> S
+  end
+
+  P["Azure Policy / Initiatives"] -.-> B
+  R["RBAC (roles + groups)"] -.-> B
+
+```
 **Przepływ logów (high level):**
 `Subscription Activity Log` → `Diagnostic Settings` → `Log Analytics Workspace` → `KQL/Alerty` → `Action Group (email)`
 

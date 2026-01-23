@@ -107,8 +107,8 @@ Celem jest stworzenie powtarzalnego fundamentu (governance + monitoring + cost c
 **Podejście:**
 - Najpierw Audit (zobaczyć compliance), potem Deny (blokowanie).
 
-**Polityki wdrażane w Lite:**
-1) Allowed locations — `["westeurope"]` — **Deny**
+**Polityki wdrażane w ALZ:**
+1) Allowed locations — `westeurope` — **Deny**
 2) Require tag on resources — `Owner`, `CostCenter` — **Deny**
 3) Require tag on resource groups — `Owner`, `Environment`, `CostCenter` — **Deny**
 4) (opcjonalnie) Require tag value — `Environment=dev` — **Deny/Audit** (zależnie od etapu)

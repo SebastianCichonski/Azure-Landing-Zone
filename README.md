@@ -46,50 +46,53 @@ Projekt jest wdrażany w pełni jako **Infrastructure as Code** (Bicep) i zawier
 ---
 
 ## Architektura
-Diagram: `docs/diagrams/landing-zone-lite.png`
+Diagram: `docs/diagrams/landing-zone.png`
 
 ```mermaid
 flowchart TB
-  A["Tenant / Entra ID"] --> B["Subscription: Azure Landing Zone"]
+  A["Tenant / Entra ID"] --> S["Subscription: <project>-<env> (Azure Landing Zone)"]
 
-  subgraph B["Subscription: Azure Landing Zone"]
+  subgraph S["Subscription: <project>-<env> (Azure Landing Zone)"]
     direction TB
 
-    subgraph RG1["RG: Connectivity"]
-      H["Hub VNet"]
-      FW["Firewall / NVA (optional)"]
-      VPN["VPN Gateway (optional)"]
-      H --- FW
-      H --- VPN
+    subgraph MON["rg-alz-*-monitor"]
+      LA["Log Analytics Workspace"]
+      AM["Azure Monitor (Alerts/Action Groups)"]
     end
 
-    subgraph RG2["RG: Management"]
-      LA["Log Analytics"]
-      AM["Azure Monitor + Alerts"]
-      DIAG["Diagnostic Settings"]
-      DIAG --> LA
-      AM --> LA
-    end
-
-    subgraph RG3["RG: Identity & Security"]
+    subgraph SH["rg-alz-*-shared"]
       KV["Key Vault"]
       MI["Managed Identities"]
       KV --- MI
     end
 
-    subgraph RG4["RG: Workloads"]
-      S["Spoke VNet"]
-      APP["Workload: VM / App Service / AKS"]
-      S --> APP
+    subgraph WL["rg-alz-*-workloads"]
+      RES["Test resources (VM/App/Storage/...)"]
+      DIAG["Diagnostic settings on resources"]
+      RES --> DIAG
     end
 
-    H <--> S
+    DIAG --> LA
+    RES -. "auth via MI" .-> MI
+    RES -. "secrets/certs" .-> KV
+    AM --> LA
   end
 
-  P["Azure Policy / Initiatives"] -.-> B
-  R["RBAC (roles + groups)"] -.-> B
+  P["Azure Policy / Initiatives"] -.-> S
+  R["RBAC (roles + groups)"] -.-> S
 
 ```
+Diagram pokazuje **Azure Landing Zone** w jednej subskrypcji powiązanej z Tenant/Entra ID. W subskrypcji masz trzy Resource Groupy:
+
+- `rg-<project>-<env>-monitor`: centralny Log Analytics Workspace oraz Azure Monitor (alerty i action groups). Monitor “karmi” Log Analytics danymi.\
+- `rg-<project>-<env>-shared`: zasoby wspólne — Key Vault i Managed Identities (tożsamości bez haseł); KV jest używany razem z MI.\
+- `rg-<project>-<env>-workloads`: testowe zasoby (VM/App/Storage). Każdy zasób ma Diagnostic Settings, które wysyłają logi do Log Analytics.
+
+**Przepływy:**
+- Diagnostic settings → Log Analytics (centralne logowanie).\
+- Workloads używają MI do dostępu (kropkowana linia “auth via MI”) i pobierają sekrety/certyfikaty z Key Vault.\
+- Na całość nałożone są Azure Policy/Initiatives oraz RBAC (kropkowane strzałki) — czyli governance i uprawnienia na poziomie subskrypcji.
+
 **Przepływ logów (high level):**
 `Subscription Activity Log` → `Diagnostic Settings` → `Log Analytics Workspace` → `KQL/Alerty` → `Action Group (email)`
 

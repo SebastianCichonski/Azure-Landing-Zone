@@ -2,6 +2,7 @@ targetScope = 'subscription'
 
 @description('Name of the Resource Group.')
 @minLength(1)
+@maxLength(90)
 param resourceGroupName string
 
 @description('Azure region for the Resource Group.')

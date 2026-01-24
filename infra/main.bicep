@@ -1,16 +1,18 @@
+targetScope = 'subscription'
 
-param location string = 'westeurope'
-param projectName string = 'alz'
-param environment string = 'dev'
+param location string 
+param projectName string
+param environment string
 
-param commonTags object = {
-  Environment: environment
-  Owner: 'Sebastian'
-  CostCenter: '1001-LAB'
-  
-}
+param commonTags object 
 
-var rgMonitorName = 'rg-${projectName}-${environment}-monitor'
-var rgSharedName = 'rg-${projectName}-${environment}-shared'
-var rgWorkloadsName = 'rg-${projectName}-${environment}-workloads'
+var rgSuffixes = ['monitor', 'shared', 'workloads']
 
+module rgs 'modules/resourceGroup.bicep' = [for suffix in rgSuffixes: {
+  name: 'rg-${suffix}'
+  params: {
+    location: location
+    resourceGroupName: 'rg-${projectName}-${environment}-${suffix}'
+    tags: commonTags
+  }
+}]

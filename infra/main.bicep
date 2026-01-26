@@ -16,6 +16,16 @@ param environment string
 @description('Common tags applaied to all resource.')
 param commonTags object 
 
+@description('Amount of budget.')
+param amount int
+
+@description('Start date of budget.')
+param startDate string
+
+@description('End date of budget.')
+param endDate string = ''
+
+
 var rgSuffixes = ['monitor', 'shared', 'workloads']
 
 module rgs 'modules/resourceGroup.bicep' = [for suffix in rgSuffixes: {
@@ -26,3 +36,14 @@ module rgs 'modules/resourceGroup.bicep' = [for suffix in rgSuffixes: {
     tags: commonTags
   }
 }]
+
+module bg 'modules/budget.bicep' = {
+  name: 'budget'
+  params: {
+    budgetName: 'bud-${projectName}-${environment}'
+    actionGroupId: actionGroupID
+    amount: amount
+    startDate: startDate
+    endDate: endDate
+  }
+}

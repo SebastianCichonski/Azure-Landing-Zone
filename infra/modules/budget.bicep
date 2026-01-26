@@ -1,18 +1,18 @@
 targetScope = 'subscription'
 
-@description('Name of the budget.')
+@description('Name of the Budget.')
 param budgetName string
 
 @description('Action Group Id for notifications.')
 param actionGroupId string
 
-@description('Amount of budget.')
+@description('Amount of Budget.')
 param amount int
 
-@description('Start date of budget.')
+@description('Start date of Budget.')
 param startDate string
 
-@description('End date of budget.')
+@description('End date of Budget.')
 param endDate string = ''
 
 var timePeriod =empty(endDate) ? {startDate: startDate} : {startDate: startDate, endDate: endDate}

@@ -1,7 +1,11 @@
-
+@description('Name of Action Group.')
 param actionGroupName string
+
+@description('Azure region for the Action Group.')
 param location string
-param emailaddress string
+
+@description('Email Address for notification.')
+param emailAddress string
 
 resource actionGroup 'Microsoft.Insights/actionGroups@2023-01-01' = {
   name: actionGroupName
@@ -9,11 +13,12 @@ resource actionGroup 'Microsoft.Insights/actionGroups@2023-01-01' = {
   properties: {
     enabled: true
     groupShortName: 'ag-alz'
-    emailReceivers: {
+    emailReceivers: [{
       name: 'AlertEmialRecivier'
       emailAddress: emailAddress
-      useCommonAlertShema: true
-    }
+      useCommonAlertSchema: true
+    }]
   }
-
 }
+
+output actionGroupId string = actionGroup.id

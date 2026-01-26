@@ -84,13 +84,13 @@ flowchart TB
 ```
 Diagram pokazuje **Azure Landing Zone** w jednej subskrypcji powiązanej z Tenant/Entra ID. W subskrypcji masz trzy Resource Groupy:
 
-- `rg-<project>-<env>-monitor`: centralny Log Analytics Workspace oraz Azure Monitor (alerty i action groups). Monitor “karmi” Log Analytics danymi.\
-- `rg-<project>-<env>-shared`: zasoby wspólne — Key Vault i Managed Identities (tożsamości bez haseł); KV jest używany razem z MI.\
+- `rg-<project>-<env>-monitor`: centralny Log Analytics Workspace oraz Azure Monitor (alerty i action groups). Monitor “karmi” Log Analytics danymi.
+- `rg-<project>-<env>-shared`: zasoby wspólne — Key Vault i Managed Identities (tożsamości bez haseł); KV jest używany razem z MI.
 - `rg-<project>-<env>-workloads`: testowe zasoby (VM/App/Storage). Każdy zasób ma Diagnostic Settings, które wysyłają logi do Log Analytics.
 
 **Przepływy:**
-- Diagnostic settings → Log Analytics (centralne logowanie).\
-- Workloads używają MI do dostępu (kropkowana linia “auth via MI”) i pobierają sekrety/certyfikaty z Key Vault.\
+- Diagnostic settings → Log Analytics (centralne logowanie).
+- Workloads używają MI do dostępu (kropkowana linia “auth via MI”) i pobierają sekrety/certyfikaty z Key Vault.
 - Na całość nałożone są Azure Policy/Initiatives oraz RBAC (kropkowane strzałki) — czyli governance i uprawnienia na poziomie subskrypcji.
 
 **Przepływ logów (high level):**

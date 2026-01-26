@@ -25,6 +25,7 @@ param startDate string
 @description('End date of budget.')
 param endDate string = ''
 
+@description('Email Address for notification.')
 param emailAddresses array
 
 

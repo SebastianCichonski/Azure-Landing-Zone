@@ -16,7 +16,8 @@ D. Walidacja parametrów (minimalna, ale bardzo przydatna)
     budgetStartDate < budgetEndDate (i format ISO 8601)
     location niepusty (i najlepiej zgodny z allowed locations)
 #>
-
+$paramFilePath = ".\infra\environments\dev.bicepparam"
+$bicepFilePath = ".\infra\main.bicep"
 
 
 function Assert-File([string] $Path) {
@@ -36,7 +37,7 @@ try {
     $azaccount = az account show --only-show-errors | ConvertFrom-Json
 }
 catch {
-    throw "Azure CLI is not logged in. Try: az login"
+    throw "Azure CLI is not logged in. Try: az login."
 }
 Write-Host ("Logged in. Subscryption: {0} ({1})" -f $azaccount.name, $azaccount.id)  -ForegroundColor DarkCyan
 
@@ -45,9 +46,18 @@ try {
     $bicepVer = az bicep version --only-show-errors
 }
 catch {
-    throw "Bicep is not available. Try: az bicep install"
+    throw "Bicep is not available. Try: az bicep install."
 }
 Write-Host "Bicep version: $bicepVer" -ForegroundColor DarkCyan
+
+# Check extension
+$ext = [IO.Path]::GetExtension($paramFilePath)
+if($ext -ne ".bicepparam") {
+    throw "This script expects '.bicepparam' file parameter."
+}
+$paramFile = Split-Path -Path $paramFilePath -Leaf
+Write-Host "Param file: $paramFile" -BackgroundColor Yellow
+
 
 Assert-File .\infra\main.bicep
 Assert-Command az

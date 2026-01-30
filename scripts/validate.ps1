@@ -18,71 +18,146 @@ D. Walidacja parametrów (minimalna, ale bardzo przydatna)
 #>
 $paramFilePath = ".\infra\environments\dev.bicepparam"
 $bicepFilePath = ".\infra\main.bicep"
+$location = "westeurope"
 
 #========Functions==============
 function Assert-File([string] $Path) {
     if(-not (Test-Path -Path $Path -PathType Leaf)) {
-        throw "File not found: $Path"
+        return 0
     }
+    return 1
 }
 
 function Assert-Command([string] $Name) {
     if(-not(Get-Command $Name -ErrorAction SilentlyContinue)) {
-        throw "Missing required command: '$Name'. Install it and try again."
+        return 0
     }
+    return 1
 }
 
 #===========Pre-flight===================
-Write-Host "===Pre-flight checks===" -ForegroundColor Yellow
+Write-Host "=== Pre-flight checks ===" -ForegroundColor Yellow
 
 # Check file
-Assert-File $bicepFilePath
-$bicepFile = Split-Path -Path $bicepFilePath -Leaf
-Write-Host "`nBicep file checked:`t" -ForegroundColor Green -NoNewline
-Write-Host "$bicepFile" -ForegroundColor Cyan
+Write-Host "Bicep file checked:`t" -ForegroundColor Green -NoNewline
+if(Assert-File $bicepFilePath) {
+    $bicepFile = Split-Path -Path $bicepFilePath -Leaf
+    Write-Host "$bicepFile" -ForegroundColor Cyan
+} 
+else {
+    Write-Host "FAIL." -ForegroundColor Red
+}
 
 # Check file
-Assert-File $paramFilePath
-$paramFile = Split-Path -Path $paramFilePath -Leaf
 Write-Host "Params file checked:`t" -ForegroundColor Green -NoNewline
-Write-Host "$paramFile" -ForegroundColor Cyan
+if(Assert-File $paramFilePath) {
+    $paramFile = Split-Path -Path $paramFilePath -Leaf
+    Write-Host "$paramFile" -ForegroundColor Cyan
+}
+else {
+    Write-Host "FAIL." -ForegroundColor Red
+}
+
+# Check az
+Write-Host "az command checked:`t" -ForegroundColor Green -NoNewline
+if(Assert-Command "az") {
+    Write-Host "OK." -ForegroundColor Cyan
+}
+else {
+    Write-Host "FAIL." -ForegroundColor Red
+}
 
 # Check extension
+Write-Host "Extension checked:`t" -ForegroundColor Green -NoNewline
 $ext = [IO.Path]::GetExtension($paramFilePath)
 if($ext -ne ".bicepparam") {
-    throw "This script expects '.bicepparam' file parameter."
+    Write-Host "FAIL." -ForegroundColor Red
 }
-Write-Host "Extension checked:`t" -ForegroundColor Green -NoNewline
-Write-Host "$ext" -ForegroundColor Cyan
+else {
+    Write-Host "$ext" -ForegroundColor Cyan
+}
 
 # Check login
-try {
-    $azaccount = az account show --only-show-errors | ConvertFrom-Json
+Write-Host "Subscription checked:`t" -ForegroundColor Green -NoNewline
+$azaccount = az account show --only-show-errors | ConvertFrom-Json
+if ($LASTEXITCODE -ne 0) { 
+    Write-Host "FAILED." -ForegroundColor Red 
+}    
+else { 
+    Write-Host "$($azaccount.name), $($azaccount.id)"  -ForegroundColor Cyan 
 }
-catch {
-    throw "Azure CLI is not logged in. Try: az login."
-}
-Write-Host "Subscryption checked:`t" -ForegroundColor Green -NoNewline
-Write-Host "$($azaccount.name), $($azaccount.id)"  -ForegroundColor Cyan
 
 # Check bicep
-try {
-    $bicepVer = az bicep version --only-show-errors
-}
-catch {
-    throw "Bicep is not available. Try: az bicep install."
-}
 Write-Host "Bicep version checked:`t"-ForegroundColor Green -NoNewline
-Write-Host "$bicepVer" -ForegroundColor Cyan
-
-Write-Host "`n===Bicep/ARM validation===" -ForegroundColor Yellow
-
-if (-not $SkipBicepBuild -and (Test-Path $TemplateFile)) {
-  Write-Host "== Bicep build =="
-
-  az bicep build --file $TemplateFile --only-show-errors | Out-Null
-  if ($LASTEXITCODE -ne 0) { throw "Bicep build failed." } Write-Host "Bicep build OK."
-} else {
-  Write-Host "Skipping bicep build."
+$bicepVer = az bicep version --only-show-errors
+if ($LASTEXITCODE -ne 0) { 
+    Write-Host "FAILED." -ForegroundColor Red 
+}    
+else { 
+    Write-Host "$bicepVer" -ForegroundColor Cyan
 }
 
+#==========Bicep/ARM validation=============
+
+Write-Host "`n=== Bicep/ARM validation ===" -ForegroundColor Yellow
+
+# Bicep build validation
+Write-Host "Bicep build:`t" -ForegroundColor Green -NoNewline
+
+az bicep build `
+ --file $bicepFilePath `
+ --only-show-errors | Out-Null
+
+if ($LASTEXITCODE -ne 0) { 
+    Write-Host "FAILED." -ForegroundColor Red 
+} 
+else {
+    Write-Host "OK." -ForegroundColor Cyan
+}
+
+# Bicep lint
+Write-Host "Bicep lint:`t" -ForegroundColor Green -NoNewline
+
+az bicep lint `
+    --file $bicepFilePath `
+    --only-show-errors | Out-Null
+
+if ($LASTEXITCODE -ne 0) { 
+    Write-Host "FAILED." -ForegroundColor Red
+}
+else { 
+    Write-Host "OK." -ForegroundColor Cyan 
+}
+
+# ARM validate (subscription scope)
+Write-Host "Deployment validate:`t" -ForegroundColor Green -NoNewline
+
+az deployment sub validate `
+    --location $location `
+    --parameters $paramFilePath `
+    --only-show-errors | Out-Null
+
+if ($LASTEXITCODE -ne 0) { 
+    Write-Host "FAILED." -ForegroundColor Red 
+}
+else {
+    Write-Host "OK." -ForegroundColor Cyan
+} 
+
+#==========What-if validation=============
+
+Write-Host "`n=== What-if ===" -ForegroundColor Yellow
+Write-Host "What-if:`t" -ForegroundColor Green -NoNewline
+
+$whatIf = az deployment sub what-if `
+      --location $location `
+      --parameters $paramFilePath `
+      --result-format ResourceIdOnly `
+      --only-show-errors
+
+if ($LASTEXITCODE -ne 0) { 
+    Write-Host "FAILED." -ForegroundColor Red 
+}
+else {
+    Write-Host $whatIf[-1] -ForegroundColor Cyan
+}

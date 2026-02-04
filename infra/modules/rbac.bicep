@@ -6,10 +6,9 @@ targetScope = 'subscription'
 @description('Object ID of the principal.')
 param principalId string
 
-@minLength(36)
-@maxLength(36)
+@minLength(1)
 @description('Role definition GUID.')
-param roleDefinitionGuid string
+param roleDefinitionGuid array
 
 @description('Type of principal for the role assignment.')
 @allowed([
@@ -22,14 +21,14 @@ param roleDefinitionGuid string
 ])
 param principalType string = 'Group'
 
-var roleDefinitionId = subscriptionResourceId('Microsoft.Authorization/roleDefinitions', roleDefinitionGuid)
-
-resource roleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
-  name: guid(subscription().id, principalId, roleDefinitionId)
-  scope: subscription()
-  properties: {
-    principalId: principalId
-    roleDefinitionId: roleDefinitionId
-    principalType: principalType
+resource roleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = [
+  for roleGuid in roleDefinitionGuid: {
+    name: guid(subscription().id, principalId, subscriptionResourceId('Microsoft.Authorization/roleDefinitions', roleGuid))
+    scope: subscription()
+    properties: {
+      principalId: principalId
+      roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', roleGuid)
+      principalType: principalType
+    }
   }
-}
+]

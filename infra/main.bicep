@@ -29,10 +29,22 @@ param endDate string = ''
 param emailAddresses array
 
 @description('Principal ID.')
-param principalId string
+param sgAuditId string
+
+@description('Principal ID.')
+param sgOpsId string
+
+@description('Principal ID.')
+param sgDevId string
 
 @description('Role GUID.')
-param roleDefinitionGuid string
+param rolesAudit array
+
+@description('Role GUID.')
+param rolesOps array
+
+@description('Role GUID.')
+param rolesDev array
 
 var rgSuffixes = ['monitor', 'shared', 'workloads']
 var monitorRgName = 'rg-${projectName}-${environment}-monitor'
@@ -68,10 +80,28 @@ module bg 'modules/budget.bicep' = {
   }
 }
 
-module rbac 'modules/rbac.bicep' = {
-  name: 'rbac-sgAudit'
+module rbacOps 'modules/rbac.bicep' = {
+  name: 'rbac-sgOps'
   params: {
-    principalId: principalId
-    roleDefinitionGuid: roleDefinitionGuid
+    principalId: sgOpsId
+    roleDefinitionGuid: rolesOps
   }
 }
+
+module rbacAudit'modules/rbac.bicep' = {
+  name: 'rbac-sgAudit'
+  params: {
+    principalId: sgAuditId
+    roleDefinitionGuid: rolesAudit
+  }
+}
+
+
+module rbacDev 'modules/rbac.bicep' = {
+  name: 'rbac-sgDev'
+  params: {
+    principalId: sgDevId
+    roleDefinitionGuid: rolesDev
+  }
+}
+

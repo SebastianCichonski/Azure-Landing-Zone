@@ -24,7 +24,6 @@ param principalType string = 'Group'
 
 var roleDefinitionId = subscriptionResourceId('Microsoft.Authorization/roleDefinitions', roleDefinitionGuid)
 
-
 resource roleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
   name: guid(subscription().id, principalId, roleDefinitionId)
   scope: subscription()

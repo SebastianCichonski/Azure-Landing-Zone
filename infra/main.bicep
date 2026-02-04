@@ -28,6 +28,11 @@ param endDate string = ''
 @description('Email Address for notification.')
 param emailAddresses array
 
+@description('Principal ID.')
+param principalId string
+
+@description('Role GUID.')
+param roleDefinitionGuid string
 
 var rgSuffixes = ['monitor', 'shared', 'workloads']
 var monitorRgName = 'rg-${projectName}-${environment}-monitor'
@@ -60,5 +65,13 @@ module bg 'modules/budget.bicep' = {
     amount: amount
     startDate: startDate
     endDate: endDate
+  }
+}
+
+module rbac 'modules/rbac.bicep' = {
+  name: 'rbac-sgAudit'
+  params: {
+    principalId: principalId
+    roleDefinitionGuid: roleDefinitionGuid
   }
 }

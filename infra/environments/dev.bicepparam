@@ -33,6 +33,7 @@ var roleGuid = {
   logAnalyticsReader: '73c42c96-874c-492b-b04d-ab87d138a893'
 }
 
+//========roleDefinitionPerGroup====//
 param rolesAudit = [
   roleGuid.reader
 ]

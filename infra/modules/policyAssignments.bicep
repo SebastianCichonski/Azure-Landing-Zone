@@ -9,8 +9,8 @@ param displayName string
 @description('ID of policy definition.')
 param policyDefinitionId string
 
-@description('Scope object.')
-param scope object = subscription()
+//@description('Scope object.')
+//param scope object = subscription()
 
 @description('Policy parameter. Format: { paramName: { value: ... } }.')
 param parameters object = {}
@@ -38,7 +38,7 @@ var identityBlock = identityType == 'UserAssigned'
 
 resource assignment 'Microsoft.Authorization/policyAssignments@2025-03-01' = {
   name: assignmentName
-  scope: scope
+  scope: subscription()
   location: location
   identity: identityBlock
   properties: {

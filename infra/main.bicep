@@ -46,6 +46,15 @@ param rolesOps array
 @description('Role GUID.')
 param rolesDev array
 
+@description('')
+param policyAllowedLocationsId string
+
+@description('')
+param policyRequireTagOnResourcesId string
+
+@description('')
+param policyRequireTagOnRGId string
+
 var rgSuffixes = ['monitor', 'shared', 'workloads']
 var monitorRgName = 'rg-${projectName}-${environment}-monitor'
 
@@ -104,4 +113,21 @@ module rbacDev 'modules/rbac.bicep' = {
     roleDefinitionGuid: rolesDev
   }
 }
+
+module paAllowLoc 'modules/policyAssignments.bicep' = {
+  name: 'paAllowedLocations'
+  params: {
+    assignmentName: 'pa-${projectName}-${environment}-allowed-locations'
+    displayName: 'Allowed Locations'
+    //scope: scope
+    policyDefinitionId: policyAllowedLocationsId
+    nonComplianceMessage: 'Resources must be deployed only in approved regions.'
+    parameters: {
+      listOfAllowedLocations: {
+        value: [ 'westeurope' ]
+      }
+    }
+  }
+}
+
 

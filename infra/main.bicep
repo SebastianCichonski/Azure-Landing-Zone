@@ -119,7 +119,6 @@ module paAllowLoc 'modules/policyAssignments.bicep' = {
   params: {
     assignmentName: 'pa-${projectName}-${environment}-allowed-locations'
     displayName: 'Allowed Locations'
-    //scope: scope
     policyDefinitionId: policyAllowedLocationsId
     nonComplianceMessage: 'Resources must be deployed only in approved regions.'
     parameters: {
@@ -129,5 +128,22 @@ module paAllowLoc 'modules/policyAssignments.bicep' = {
     }
   }
 }
+
+var tagsName = ['Owner', 'Environment', 'CostCenter']
+
+module paReqTagOnRes 'modules/policyAssignments.bicep' = [for tagName in tagsName: {
+  name: 'paReqTag${tagName}Res'
+  params: {
+    assignmentName: 'pa-${projectName}-${environment}-req-tag-${toLower(tagName)}-res'
+    displayName: 'Require tag on resources (${tagName})'
+    policyDefinitionId: policyRequireTagOnResourcesId
+    nonComplianceMessage: 'Resources must have a tag: ${tagName}'
+    parameters: {
+      tag: {
+        value: '${tagName}'
+      }
+    }
+  }
+}]
 
 

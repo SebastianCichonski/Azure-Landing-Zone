@@ -1,6 +1,6 @@
-# Azure Policy — Governance Baseline (Landing Zone Lite)
+# Azure Policy — Governance Baseline (Azure Landing Zone)
 
-Ten dokument opisuje zestaw **Azure Policy** zastosowany w projekcie **Landing Zone Lite**: cele, przypisania, parametry,
+Ten dokument opisuje zestaw **Azure Policy** zastosowany w projekcie **Azure Landing Zone**: cele, przypisania, parametry,
 zakres (scope), testy oraz evidence pack.
 
 ---
@@ -12,7 +12,7 @@ zakres (scope), testy oraz evidence pack.
 - kontrola lokalizacji (wdrożenia tylko w wybranych regionach)
 - minimalne “guardrails” dla labu (łatwe do pokazania i przetestowania)
 
-**Co jest poza zakresem wersji Lite (roadmap):**
+**Co jest poza zakresem tej wersji (roadmap):**
 - inicjatywy “enterprise scale” dla MG (management groups)
 - złożone polityki security (Defender for Cloud, private endpoints only, itd.)
 - automatyczne remediation (DeployIfNotExists) na dużą skalę
@@ -73,6 +73,7 @@ zakres (scope), testy oraz evidence pack.
 - **Policy:** Require a tag on resource groups (built-in)
 - **Effect:** Deny
 - **Parametry:** `tagName="Owner"` / `"Environment"` / `"CostCenter"`
+- **Non-compliance message:** np. `Missing required tag: Owner`
 - **Uzasadnienie:** porządek od samego początku.
 
 ---
@@ -91,11 +92,6 @@ Przykładowe wartości:
 
 W wersji Lite zwykle brak exemptions.
 
-Jeśli dodasz:
-- **kiedy:** np. czasowe testy
-- **zakres:** tylko konkretny RG
-- **czas:** od-do
-- **uzasadnienie:** dlaczego potrzebne
 
 ---
 

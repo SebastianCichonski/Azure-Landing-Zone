@@ -55,6 +55,9 @@ param policyRequireTagOnResourcesId string
 @description('')
 param policyRequireTagOnRGId string
 
+@description('Carogories of Activity Log')
+param categories string[]
+
 var rgSuffixes = ['monitor', 'shared', 'workloads']
 var monitorRgName = 'rg-${projectName}-${environment}-monitor'
 
@@ -140,10 +143,32 @@ module paReqTagOnRes 'modules/policyAssignments.bicep' = [for tagName in tagsNam
     nonComplianceMessage: 'Resources must have a tag: ${tagName}'
     parameters: {
       tag: {
-        value: '${tagName}'
+        value: tagName
       }
     }
   }
 }]
 
+module paReqTagOnRG 'modules/policyAssignments.bicep' = [for tagName in tagsName: {
+  name: 'paReqTag${tagName}RG'
+  params: {
+    assignmentName: 'pa-${projectName}-${environment}-req-tag-${toLower(tagName)}-rg'
+    displayName: 'Require tag on Resource Group (${tagName})'
+    policyDefinitionId: policyRequireTagOnResourcesId
+    nonComplianceMessage: 'Resource Group must have a tag: ${tagName}'
+    parameters: {
+      tag: {
+        value: tagName
+      }
+    }
+  }
+}]
 
+module diagSettingsAL 'modules/diagnosticSettings.bicep' = {
+  name: 'diagnosticSettingsAL'
+  params: {
+    diagName: 'dsLA-${projectName}-${environment}'
+    workspaceId: alWorkspaceID
+    categories: categories
+  }
+}

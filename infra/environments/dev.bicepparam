@@ -51,3 +51,11 @@ param rolesDev = [
 param policyAllowedLocationsId = '/providers/Microsoft.Authorization/policyDefinitions/e56962a6-4747-49cd-b67b-bf8b01975c4c'
 param policyRequireTagOnResourcesId = '/providers/Microsoft.Authorization/policyDefinitions/d9a3c8d6-0a0c-4a2e-8d5f-3f5f1c9d3c6a'
 param policyRequireTagOnRGId = '/providers/Microsoft.Authorization/policyDefinitions/4f9e5b1f-5f3c-4d3b-8a3b-1f3b0b1e1f3a'
+
+//==========diagnosticSettings===//
+param categories = [
+  'Administrative'
+  'Security'
+  'Alert'
+  'Policy'
+]

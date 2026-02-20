@@ -17,7 +17,7 @@ param workspaceId string
     'Autoscale'
     'ResourceHealth'
 ])
-param categories array
+param categories string[]
 
 resource diagnosticSettings 'Microsoft.Insights/diagnosticSettings@2021-05-01-preview' = {
     name: diagName

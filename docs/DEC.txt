@@ -1,0 +1,39 @@
+DEC-0004: Public Network Access dla Log Analytics (Ingestion/Query)
+
+Status: Accepted
+Data: 2026-02-20
+Kontekst:
+Projekt “Landing Zone Lite” ma działać jako tani lab i portfolio. Logi z poziomu subskrypcji (Azure Activity Log) są wysyłane do Log Analytics przez Microsoft.Insights/diagnosticSettings. Workspace ma być dostępny do weryfikacji danych w Azure Portal oraz do prostych zapytań KQL.
+
+Decyzja:
+Ustawiamy w Log Analytics Workspace:
+
+publicNetworkAccessForIngestion = 'Enabled'
+
+publicNetworkAccessForQuery = 'Enabled'
+
+Uzasadnienie:
+
+Minimalna złożoność i koszt — brak konieczności budowania Private Link / AMPLS / prywatnych DNS.
+
+Zapewnia działanie “out-of-the-box” dla scenariusza: Subscription Activity Log → Diagnostic Settings → Log Analytics.
+
+Ułatwia demonstrację i testy (portal, KQL, zrzuty ekranów do portfolio).
+
+Konsekwencje:
+
+Workspace jest dostępny przez publiczne endpointy (zależnie od uprawnień RBAC).
+
+W środowisku produkcyjnym może to nie spełniać wymogów bezpieczeństwa (np. pełna izolacja sieciowa).
+
+Alternatywy rozważane:
+
+Disabled/Disabled + Private Link (lub AMPLS)
+
+Plusy: lepsza izolacja sieciowa, zgodność z restrykcyjnymi wymaganiami.
+
+Minusy: większa złożoność, koszt, konieczność konfiguracji Private DNS i dodatkowych zasobów.
+
+Kiedy zmienimy decyzję:
+
+Gdy projekt będzie rozszerzany do wariantu “enterprise”, z wymogiem braku publicznych endpointów (np. polityki bezpieczeństwa organizacji), dodamy Private Link/AMPLS i przełączymy publicNetworkAccess* na Disabled.

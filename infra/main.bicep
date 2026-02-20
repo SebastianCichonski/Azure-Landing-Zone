@@ -59,6 +59,7 @@ param policyRequireTagOnRGId string
 param categories string[]
 
 var rgSuffixes = ['monitor', 'shared', 'workloads']
+var tagsName = ['Owner', 'Environment', 'CostCenter']
 var monitorRgName = 'rg-${projectName}-${environment}-monitor'
 
 module rgs 'modules/resourceGroup.bicep' = [for suffix in rgSuffixes: {
@@ -132,8 +133,6 @@ module paAllowLoc 'modules/policyAssignments.bicep' = {
   }
 }
 
-var tagsName = ['Owner', 'Environment', 'CostCenter']
-
 module paReqTagOnRes 'modules/policyAssignments.bicep' = [for tagName in tagsName: {
   name: 'paReqTag${tagName}Res'
   params: {
@@ -154,7 +153,7 @@ module paReqTagOnRG 'modules/policyAssignments.bicep' = [for tagName in tagsName
   params: {
     assignmentName: 'pa-${projectName}-${environment}-req-tag-${toLower(tagName)}-rg'
     displayName: 'Require tag on Resource Group (${tagName})'
-    policyDefinitionId: policyRequireTagOnResourcesId
+    policyDefinitionId: policyRequireTagOnRGId
     nonComplianceMessage: 'Resource Group must have a tag: ${tagName}'
     parameters: {
       tag: {
@@ -164,10 +163,18 @@ module paReqTagOnRG 'modules/policyAssignments.bicep' = [for tagName in tagsName
   }
 }]
 
+module logAnalytics 'modules/logAnalytics.bicep' = {
+  name: 'logAnalytics'
+  params: {
+    workspaceName:
+  }
+}
+
+
 module diagSettingsAL 'modules/diagnosticSettings.bicep' = {
   name: 'diagnosticSettingsAL'
   params: {
-    diagName: 'dsLA-${projectName}-${environment}'
+    diagName: 'diag-${projectName}-${environment}-sub-activity'
     workspaceId: alWorkspaceID
     categories: categories
   }

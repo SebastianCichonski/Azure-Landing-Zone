@@ -30,6 +30,7 @@ resource diagnosticSettings 'Microsoft.Insights/diagnosticSettings@2021-05-01-pr
                 enabled: true
             }
         ]
+        metrics: []
     }
 
 }

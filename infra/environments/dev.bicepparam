@@ -53,7 +53,7 @@ param policyRequireTagOnResourcesId = '/providers/Microsoft.Authorization/policy
 param policyRequireTagOnRGId = '/providers/Microsoft.Authorization/policyDefinitions/4f9e5b1f-5f3c-4d3b-8a3b-1f3b0b1e1f3a'
 
 //==========diagnosticSettings===//
-param categories = [
+param alCategories = [
   'Administrative'
   'Security'
   'Alert'

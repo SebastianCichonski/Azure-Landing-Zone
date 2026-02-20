@@ -56,7 +56,16 @@ param policyRequireTagOnResourcesId string
 param policyRequireTagOnRGId string
 
 @description('Carogories of Activity Log')
-param categories string[]
+param alCategories ActivityLogCategory[]
+
+type ActivityLogCategory =  'Administrative'
+| 'Security'
+| 'ServiceHealth'
+| 'Alert'
+| 'Recommendation'
+| 'Policy'
+| 'Autoscale'
+| 'ResourceHealth'
 
 var rgSuffixes = ['monitor', 'shared', 'workloads']
 var tagsName = ['Owner', 'Environment', 'CostCenter']
@@ -165,8 +174,11 @@ module paReqTagOnRG 'modules/policyAssignments.bicep' = [for tagName in tagsName
 
 module logAnalytics 'modules/logAnalytics.bicep' = {
   name: 'logAnalytics'
+  scope: resourceGroup(monitorRgName)
   params: {
-    workspaceName:
+    workspaceName: 'law-${projectName}-${environment}'
+    location: location
+    tags: commonTags
   }
 }
 
@@ -175,7 +187,7 @@ module diagSettingsAL 'modules/diagnosticSettings.bicep' = {
   name: 'diagnosticSettingsAL'
   params: {
     diagName: 'diag-${projectName}-${environment}-sub-activity'
-    workspaceId: alWorkspaceID
-    categories: categories
+    workspaceId: logAnalytics.outputs.workspaceId
+    categories: alCategories
   }
 }

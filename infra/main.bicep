@@ -132,7 +132,7 @@ module policyAllowedLocations 'modules/policyAssignments.bicep' = {
     assignmentName: 'pa-${projectName}-${environment}-allowed-locations'
     displayName: 'Allowed Locations'
     policyDefinitionId: policyAllowedLocationsId
-    nonComplianceMessage: 'Resources must be deployed only in approved regions.'
+    nonComplianceMessage: 'Deployments are restricted to West Europe.'
     parameters: {
       listOfAllowedLocations: {
         value: [ 'westeurope' ]
@@ -147,7 +147,7 @@ module policyRequireTagsOnResources 'modules/policyAssignments.bicep' = [for tag
     assignmentName: 'pa-${projectName}-${environment}-req-tag-${toLower(tagName)}-res'
     displayName: 'Require tag on resources (${tagName})'
     policyDefinitionId: policyRequireTagOnResourcesId
-    nonComplianceMessage: 'Resources must have a tag: ${tagName}'
+    nonComplianceMessage: 'Missing required tag: ${tagName}'
     parameters: {
       tag: {
         value: tagName
@@ -162,7 +162,7 @@ module policyRequireTagsOnResourceGroups 'modules/policyAssignments.bicep' = [fo
     assignmentName: 'pa-${projectName}-${environment}-req-tag-${toLower(tagName)}-rg'
     displayName: 'Require tag on Resource Group (${tagName})'
     policyDefinitionId: policyRequireTagOnRGId
-    nonComplianceMessage: 'Resource Group must have a tag: ${tagName}'
+    nonComplianceMessage: 'Missing required tag: ${tagName}'
     parameters: {
       tag: {
         value: tagName

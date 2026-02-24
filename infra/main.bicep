@@ -17,16 +17,16 @@ param environment string
 param commonTags object 
 
 @description('Amount of budget.')
-param amount int
+param budgetAmount int
 
 @description('Start date of budget.')
-param startDate string
+param budgetStartDate string
 
 @description('End date of budget.')
-param endDate string = ''
+param budgetEndDate string = ''
 
 @description('Email Address for notification.')
-param emailAddresses array
+param alertEmailAddresses array
 
 @description('Principal ID.')
 param sgAuditId string
@@ -56,7 +56,7 @@ param policyRequireTagOnResourcesId string
 param policyRequireTagOnRGId string
 
 @description('Carogories of Activity Log')
-param alCategories ActivityLogCategory[]
+param activityLogCategories ActivityLogCategory[]
 
 type ActivityLogCategory =  'Administrative'
 | 'Security'
@@ -80,55 +80,54 @@ module rgs 'modules/resourceGroup.bicep' = [for suffix in rgSuffixes: {
   }
 }]
 
-module ag 'modules/actionGroup.bicep' = {
-  name: 'actionGroup'
+module actionGroupMonitor 'modules/actionGroup.bicep' = {
+  name: 'monitor-actionGroup'
   scope: resourceGroup(monitorRgName)
   dependsOn: [ rgs[0] ]
   params: {
     tags: commonTags
     actionGroupName: 'ag-${projectName}-${environment}'
-    emailAddresses: emailAddresses
+    emailAddresses: alertEmailAddresses
   }
 }
 
-module bg 'modules/budget.bicep' = {
-  name: 'budget'
+module budgetSubscription 'modules/budget.bicep' = {
+  name: 'cost-budget'
   params: {
     budgetName: 'bud-${projectName}-${environment}'
-    actionGroupId: ag.outputs.actionGroupId
-    amount: amount
-    startDate: startDate
-    endDate: endDate
+    actionGroupId: actionGroupMonitor.outputs.actionGroupId
+    amount: budgetAmount
+    startDate: budgetStartDate
+    endDate: budgetEndDate
   }
 }
 
 module rbacOps 'modules/rbac.bicep' = {
-  name: 'rbac-sgOps'
+  name: 'iam-rbac-sgOps'
   params: {
     principalId: sgOpsId
     roleDefinitionGuid: rolesOps
   }
 }
 
-module rbacAudit'modules/rbac.bicep' = {
-  name: 'rbac-sgAudit'
+module rbacAudit 'modules/rbac.bicep' = {
+  name: 'iam-rbac-sgAudit'
   params: {
     principalId: sgAuditId
     roleDefinitionGuid: rolesAudit
   }
 }
 
-
 module rbacDev 'modules/rbac.bicep' = {
-  name: 'rbac-sgDev'
+  name: 'iam-rbac-sgDev'
   params: {
     principalId: sgDevId
     roleDefinitionGuid: rolesDev
   }
 }
 
-module paAllowLoc 'modules/policyAssignments.bicep' = {
-  name: 'paAllowedLocations'
+module policyAllowedLocations 'modules/policyAssignments.bicep' = {
+  name: 'governance-pa-allowedLocations'
   params: {
     assignmentName: 'pa-${projectName}-${environment}-allowed-locations'
     displayName: 'Allowed Locations'
@@ -142,8 +141,8 @@ module paAllowLoc 'modules/policyAssignments.bicep' = {
   }
 }
 
-module paReqTagOnRes 'modules/policyAssignments.bicep' = [for tagName in tagsName: {
-  name: 'paReqTag${tagName}Res'
+module policyRequireTagsOnResources 'modules/policyAssignments.bicep' = [for tagName in tagsName: {
+  name: 'governance-pa-ReqTag${tagName}Res'
   params: {
     assignmentName: 'pa-${projectName}-${environment}-req-tag-${toLower(tagName)}-res'
     displayName: 'Require tag on resources (${tagName})'
@@ -157,8 +156,8 @@ module paReqTagOnRes 'modules/policyAssignments.bicep' = [for tagName in tagsNam
   }
 }]
 
-module paReqTagOnRG 'modules/policyAssignments.bicep' = [for tagName in tagsName: {
-  name: 'paReqTag${tagName}RG'
+module policyRequireTagsOnResourceGroups 'modules/policyAssignments.bicep' = [for tagName in tagsName: {
+  name: 'governance-pa-ReqTag${tagName}RG'
   params: {
     assignmentName: 'pa-${projectName}-${environment}-req-tag-${toLower(tagName)}-rg'
     displayName: 'Require tag on Resource Group (${tagName})'
@@ -172,8 +171,8 @@ module paReqTagOnRG 'modules/policyAssignments.bicep' = [for tagName in tagsName
   }
 }]
 
-module logAnalytics 'modules/logAnalytics.bicep' = {
-  name: 'logAnalytics'
+module logAnalyticsMonitor 'modules/logAnalytics.bicep' = {
+  name: 'monitor-logAnalytics'
   scope: resourceGroup(monitorRgName)
   params: {
     workspaceName: 'law-${projectName}-${environment}'
@@ -183,11 +182,11 @@ module logAnalytics 'modules/logAnalytics.bicep' = {
 }
 
 
-module diagSettingsAL 'modules/diagnosticSettings.bicep' = {
-  name: 'diagnosticSettingsAL'
+module diagSubscriptionActivityLogToLaw 'modules/diagnosticSettings.bicep' = {
+  name: 'monitor-diag-activityLog'
   params: {
     diagName: 'diag-${projectName}-${environment}-sub-activity'
-    workspaceId: logAnalytics.outputs.workspaceId
-    categories: alCategories
+    workspaceId: logAnalyticsMonitor.outputs.workspaceId
+    categories: activityLogCategories
   }
 }

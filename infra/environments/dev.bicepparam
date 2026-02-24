@@ -12,13 +12,13 @@ param commonTags = {
 
 
 //=========Budget=============//
-param amount = 10
-param startDate = '2026-01-01T00:00:00Z'
-param endDate = '2026-12-31T23:59:59Z'
+param budgetAmount = 10
+param budgetStartDate = '2026-01-01T00:00:00Z'
+param budgetEndDate = '2026-12-31T23:59:59Z'
 
 
 //=========ActionGroup==========//
-param emailAddresses = ['sebqu@outlook.com' ]
+param alertEmailAddresses = ['sebqu@outlook.com' ]
 
 //======secGroupId=============//
 param sgAuditId = 'a5704b10-e51a-4079-91ac-c50bd0f07b30'
@@ -53,7 +53,7 @@ param policyRequireTagOnResourcesId = '/providers/Microsoft.Authorization/policy
 param policyRequireTagOnRGId = '/providers/Microsoft.Authorization/policyDefinitions/4f9e5b1f-5f3c-4d3b-8a3b-1f3b0b1e1f3a'
 
 //==========diagnosticSettings===//
-param alCategories = [
+param activityLogCategories = [
   'Administrative'
   'Security'
   'Alert'

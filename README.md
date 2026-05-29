@@ -41,7 +41,7 @@ Projekt jest wdrażany w pełni jako **Infrastructure as Code** (Bicep) i zawier
 ---
 
 ## Co to jest Landing Zone
-**Landing Zone** w Azure to zestaw standardów i bazowych usług platformy, który przygotowuje środowisko pod wdrażanie workloadów w sposób **spójny, bezpieczny i skalowalny**. W tej wersji “Lite” pokazuję fundamenty: **RBAC, Policy, Monitoring, Cost controls**.
+**Landing Zone** w Azure to zestaw standardów i bazowych usług platformy, który przygotowuje środowisko pod wdrażanie workloadów w sposób **spójny, bezpieczny i skalowalny**. W tej wersji  pokazuję fundamenty: **RBAC, Policy, Monitoring, Cost controls**.
 
 ---
 
@@ -50,23 +50,23 @@ Diagram: `docs/diagrams/landing-zone.png`
 
 ```mermaid
 flowchart TB
-  A["Tenant / Entra ID"] --> S["Subscription: <project>-<env> (Azure Landing Zone)"]
+  A["Tenant / Entra ID"] --> S["Subscription: {project}-{env} (Azure Landing Zone)"]
 
-  subgraph S["Subscription: <project>-<env> (Azure Landing Zone)"]
+  subgraph S["Subscription: {project}-{env} (Azure Landing Zone)"]
     direction TB
 
-    subgraph MON["rg-alz-*-monitor"]
+    subgraph MON["rg-alz-{env}-monitor"]
       LA["Log Analytics Workspace"]
       AM["Azure Monitor (Alerts/Action Groups)"]
     end
 
-    subgraph SH["rg-alz-*-shared"]
+    subgraph SH["rg-alz-{env}-shared"]
       KV["Key Vault"]
       MI["Managed Identities"]
       KV --- MI
     end
 
-    subgraph WL["rg-alz-*-workloads"]
+    subgraph WL["rg-alz-{env}-workloads"]
       RES["Test resources (VM/App/Storage/...)"]
       DIAG["Diagnostic settings on resources"]
       RES --> DIAG
@@ -82,7 +82,7 @@ flowchart TB
   R["RBAC (roles + groups)"] -.-> S
 
 ```
-Diagram pokazuje **Azure Landing Zone** w jednej subskrypcji powiązanej z Tenant/Entra ID. W subskrypcji masz trzy Resource Groupy:
+Diagram pokazuje **Azure Landing Zone** w jednej subskrypcji powiązanej z Tenant/Entra ID. W subskrypcji mamy trzy Resource Groupy:
 
 - `rg-<project>-<env>-monitor`: centralny Log Analytics Workspace oraz Azure Monitor (alerty i action groups). Monitor “karmi” Log Analytics danymi.
 - `rg-<project>-<env>-shared`: zasoby wspólne — Key Vault i Managed Identities (tożsamości bez haseł); KV jest używany razem z MI.
@@ -106,9 +106,9 @@ Diagram pokazuje **Azure Landing Zone** w jednej subskrypcji powiązanej z Tenan
 - `rg-<project>-<env>-workloads` — zasoby testowe do walidacji policy
 
 ### Monitoring
-- Log Analytics Workspace: `law-<project>-<env>` (retencja: `<np. 30 dni>`)
+- Log Analytics Workspace: `law-<project>-<env>` (retencja: ` 30 dni`)
 - Diagnostic Settings na subskrypcji: Activity Log → Log Analytics
-- Action Group: `ag-<project>-<env>` (email: `<twoj-email>`)
+- Action Group: `ag-<project>-<env>` (email: `owner@outlook.com`)
 
 ### Governance / Cost
 - Azure Policy Assignments (tagi + allowed locations)
@@ -151,13 +151,12 @@ Diagram pokazuje **Azure Landing Zone** w jednej subskrypcji powiązanej z Tenan
 
 ## Governance: Azure Policy
 
-Poniżej przykładowy minimalny zestaw przypisań policy dla Landing Zone Lite (scope: subskrypcja).
+Poniżej przykładowy minimalny zestaw przypisań policy dla tego projektu Landing Zone (scope: subskrypcja).
 
 | Polityka | Efekt | Parametry | Cel |
 |---------|------|----------|-----|
 | Allowed locations | Deny | `["westeurope"]` | Blokada wdrożeń poza regionem |
-| Require tag on resources | Deny | `Owner` | Wymusza tag Owner na zasobach |
-| Require tag on resources | Deny | `CostCenter` | Wymusza tag CostCenter na zasobach |
+| Require tag on resources | Deny | `Owner`, `Environment`, `CostCenter` | Wymusza tagi na zasobach |
 | Require tag on resource groups | Deny | `Owner`, `Environment`, `CostCenter` | Porządek tagów na RG |
 
 **Uwagi:**
@@ -169,13 +168,12 @@ Poniżej przykładowy minimalny zestaw przypisań policy dla Landing Zone Lite (
 
 ### Log Analytics
 - Workspace: `law-<project>-<env>`
-- Retencja: `<np. 30 dni>`
+- Retencja: `30 dni`
 
 ### Activity Log → Log Analytics
 - Diagnostic Settings na scope subskrypcji wysyła Activity Log do LA.
 
 ### Przykładowe zapytania KQL
-> Wklej/zmodyfikuj pod swoje dane (tabela `AzureActivity` jest typowa dla Activity Log w LA).
 
 **Ostatnie zdarzenia administracyjne (24h):**
 ```kusto
@@ -197,9 +195,9 @@ AzureActivity
 ---
 
 ## Kontrola kosztów
-- Budget: `<np. 15>`
+- Budget: `15`
 - Progi alertów: 50% / 80% / 100%
-- Odbiorcy powiadomień: `sebqu@outlook.com`
+- Odbiorcy powiadomień: `owner@outlook.com`
 
 **Zasady “taniego labu”:**
 - 1 region + policy Allowed locations
@@ -213,8 +211,8 @@ Szczegółowy opis wdrożenia: `infra/README-deploy.md`
 
 Skrót:
 ```powershell
-pwsh ./scripts/validate.ps1 -Location westeurope -ParamsFile ./infra/params/dev.json
-pwsh ./scripts/deploy.ps1   -Location westeurope -ParamsFile ./infra/params/dev.json
+pwsh ./scripts/validate.ps1 -Location westeurope -ParamsFile ./infra/environment/dev.bicepparaam
+pwsh ./scripts/deploy.ps1   -Location westeurope -ParamsFile ./infra/environment/dev.bicepparam
 ```
 
 ---
@@ -272,7 +270,7 @@ Rekomendowany zestaw:
 landing-zone/
 ├─ infra/
 │  ├─ main.bicep
-│  ├─ evironment/
+│  ├─ environments/
 │  │  ├─ prod.bicepparam
 │  │  └─ dev.bicepparam
 │  ├─ modules/

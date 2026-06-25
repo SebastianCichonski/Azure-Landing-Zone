@@ -132,13 +132,13 @@ Celem jest stworzenie powtarzalnego fundamentu (governance + monitoring + cost c
 - Daje podstawę pod alerting i operacje.
 
 **Konsekwencje / koszty:**
-- Koszt zależy od ingestowanych logów. W Lite zbieramy tylko Activity Log i ustawiamy krótką retencję.
+- Koszt zależy od ingestowanych logów. W AZL zbieramy tylko Activity Log i ustawiamy krótką retencję.
 
 ---
 
 ## 8. Cost controls
 
-**Budżet subskrypcji:** `<np. 15>`  
+**Budżet subskrypcji:** `50`  
 **Progi alertów:** 50% / 80% / 100%  
 **Kanał powiadomień:** email (Action Group / bezpośrednio)
 

@@ -1,6 +1,6 @@
-# RBAC (Role-Based Access Control) — Landing Zone Lite
+# RBAC (Role-Based Access Control) — Azure Landing Zone
 
-Ten dokument opisuje model **Azure RBAC** wdrożony w projekcie **Landing Zone Lite**: grupy, role, scope, uzasadnienie
+Ten dokument opisuje model **Azure RBAC** wdrożony w projekcie **Azure Landing Zone**: grupy, role, scope, uzasadnienie
 (least privilege), implementację w IaC oraz sposób weryfikacji (evidence pack).
 
 > Uwaga: **grupy Microsoft Entra ID** nie są tworzone przez Bicep/ARM — w projekcie zakładamy, że powstają ręcznie
@@ -13,7 +13,7 @@ Ten dokument opisuje model **Azure RBAC** wdrożony w projekcie **Landing Zone L
 - Rozdzielenie ról: **audit / ops / dev**
 - Minimalizacja uprawnień (least privilege)
 - Preferowane przypisania: **Group assignments** zamiast przypisań bezpośrednio do userów
-- Prosta demonstracja na scope subskrypcji (wersja Lite)
+- Prosta demonstracja na scope subskrypcji
 
 ---
 
@@ -21,9 +21,9 @@ Ten dokument opisuje model **Azure RBAC** wdrożony w projekcie **Landing Zone L
 
 **Docelowy scope przypisań:** `Subscription`
 
-**Dlaczego subscription scope w wersji Lite?**
+**Dlaczego subscription scope w tej wersji?**
 - szybciej i czytelniej do portfolio (jedno miejsce weryfikacji)
-- mniej “szumu” w repo
+
 
 **Prod-like (roadmap):**
 - scope per RG (`rg-...-monitor`, `rg-...-workloads`)
@@ -35,7 +35,7 @@ Ten dokument opisuje model **Azure RBAC** wdrożony w projekcie **Landing Zone L
 
 | Grupa | Opis | Kto należy |
 |------|------|------------|
-| `sg-lz-audit` | audyt/odczyt | osoby audytu / rekruter (read-only demo) |
+| `sg-lz-audit` | audyt/odczyt | osoby audytu |
 | `sg-lz-ops` | monitoring i operacje | admin/ops |
 | `sg-lz-dev` | wdrożenia w labie | dev/test |
 

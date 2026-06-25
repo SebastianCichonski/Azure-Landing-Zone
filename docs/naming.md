@@ -1,6 +1,6 @@
 # Naming standard
 
-Ten dokument opisuje standard nazewnictwa dla repozytorium **Azure-Landing-Zone** (Landing Zone Lite).
+Ten dokument opisuje standard nazewnictwa dla repozytorium **Azure-Landing-Zone** (AZL).
 Celem jest spójność nazw w kodzie (Bicep), w Azure Portal oraz w historii deploymentów.
 
 ---

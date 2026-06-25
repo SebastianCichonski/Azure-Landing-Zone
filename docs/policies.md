@@ -22,7 +22,7 @@ zakres (scope), testy oraz evidence pack.
 ## 2) Scope i konwencje
 
 **Scope przypisań:** `Subscription`  
-**Uzasadnienie:** wersja Lite — prostsza demonstracja guardrails. W wersji “prod-like” część przypisań przejdzie na MG/RG.
+**Uzasadnienie:** wersja LAB - prostsza demonstracja guardrails. W wersji “prod-like” część przypisań przejdzie na MG/RG.
 
 **Nazewnictwo:**
 - Assignment name: `pa-<project>-<env>-<short>`
@@ -33,9 +33,8 @@ zakres (scope), testy oraz evidence pack.
 
 ---
 
-## 3) Zestaw polityk (minimum w LZ Lite)
+## 3) Zestaw polityk 
 
-> Minimalny zestaw “portfolio friendly” — łatwy do wytłumaczenia i pokazania na screenach.
 
 | ID/Typ | Nazwa (displayName) | Efekt | Scope | Parametry | Cel |
 |-------|----------------------|-------|-------|----------|-----|
@@ -46,10 +45,6 @@ zakres (scope), testy oraz evidence pack.
 | Built-in | Require a tag on resource groups | Deny | Subscription | `tagName="Owner"` | porządek tagów na RG |
 | Built-in | Require a tag on resource groups | Deny | Subscription | `tagName="Environment"` | porządek tagów na RG |
 | Built-in | Require a tag on resource groups | Deny | Subscription | `tagName="CostCenter"` | porządek tagów na RG |
-
-**Opcjonalne (jeśli chcesz dodać „security wow effect”):**
-| Built-in | Not allowed resource types | Deny | Subscription | np. public IP / wybrane resource types | ograniczenie “ryzykownych” zasobów w labie |
-| Built-in | Audit VMs without managed disks | Audit | Subscription | - | przykład audytu bez blokowania |
 
 ---
 
@@ -80,7 +75,7 @@ zakres (scope), testy oraz evidence pack.
 
 ## 5) Parametry i źródło prawdy
 
-**Źródło prawdy dla wartości:** `infra/params/<env>.bicepparam`
+**Źródło prawdy dla wartości:** `infra/environments/<env>.bicepparam`
 
 Przykładowe wartości:
 - `allowedLocations`: `["westeurope"]`
@@ -90,7 +85,7 @@ Przykładowe wartości:
 
 ## 6) Wyjątki / exemptions (opcjonalnie)
 
-W wersji Lite zwykle brak exemptions.
+Brak exemptions.
 
 
 ---

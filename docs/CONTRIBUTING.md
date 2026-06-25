@@ -82,7 +82,7 @@ Przykłady:
 
 ---
 
-## 3) Checklist PR / zmiany (nawet jeśli pracujesz solo)
+## 3) Checklist PR / zmiany 
 
 ### IaC (Bicep)
 - [ ] `az bicep build` przechodzi (brak błędów składni)

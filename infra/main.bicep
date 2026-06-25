@@ -26,7 +26,7 @@ param budgetStartDate string
 param budgetEndDate string = ''
 
 @description('Email Address for notification.')
-param alertEmailAddresses array
+param alertEmailAddresses string[]
 
 @description('Principal ID.')
 param sgAuditId string
@@ -38,21 +38,21 @@ param sgOpsId string
 param sgDevId string
 
 @description('Role GUID.')
-param rolesAudit array
+param rolesAudit string[]
 
 @description('Role GUID.')
-param rolesOps array
+param rolesOps string[]
 
 @description('Role GUID.')
-param rolesDev array
+param rolesDev string[]
 
-@description('')
+@description('Policy ID.')
 param policyAllowedLocationsId string
 
-@description('')
+@description('Policy ID.')
 param policyRequireTagOnResourcesId string
 
-@description('')
+@description('Policy ID.')
 param policyRequireTagOnRGId string
 
 @description('Carogories of Activity Log')
@@ -164,7 +164,7 @@ module policyRequireTagsOnResourceGroups 'modules/policyAssignments.bicep' = [fo
     policyDefinitionId: policyRequireTagOnRGId
     nonComplianceMessage: 'Missing required tag: ${tagName}'
     parameters: {
-      tag: {
+      tagName: {
         value: tagName
       }
     }

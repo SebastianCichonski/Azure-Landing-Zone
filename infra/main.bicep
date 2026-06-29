@@ -174,6 +174,9 @@ module policyRequireTagsOnResourceGroups 'modules/policyAssignments.bicep' = [fo
 module logAnalyticsMonitor 'modules/logAnalytics.bicep' = {
   name: 'monitor-logAnalytics'
   scope: resourceGroup(monitorRgName)
+  dependsOn: [
+    rgs[0]
+  ]
   params: {
     workspaceName: 'law-${projectName}-${environment}'
     location: location

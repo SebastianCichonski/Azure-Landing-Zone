@@ -13,7 +13,7 @@ param commonTags = {
 
 //=========Budget=============//
 param budgetAmount = 10
-param budgetStartDate = '2026-01-01T00:00:00Z'
+param budgetStartDate = '2026-06-01T00:00:00Z'
 param budgetEndDate = '2026-12-31T23:59:59Z'
 
 
@@ -49,8 +49,8 @@ param rolesDev = [
 
 //============policeId's=========//
 param policyAllowedLocationsId = '/providers/Microsoft.Authorization/policyDefinitions/e56962a6-4747-49cd-b67b-bf8b01975c4c'
-param policyRequireTagOnResourcesId = '/providers/Microsoft.Authorization/policyDefinitions/d9a3c8d6-0a0c-4a2e-8d5f-3f5f1c9d3c6a'
-param policyRequireTagOnRGId = '/providers/Microsoft.Authorization/policyDefinitions/4f9e5b1f-5f3c-4d3b-8a3b-1f3b0b1e1f3a'
+param policyRequireTagOnResourcesId = '/providers/Microsoft.Authorization/policyDefinitions/871b6d14-10aa-478d-b590-94f262ecfa99'
+param policyRequireTagOnRGId = '/providers/Microsoft.Authorization/policyDefinitions/96670d01-0a4d-4649-9c89-2d3abc0a5025'
 
 //==========diagnosticSettings===//
 param activityLogCategories = [

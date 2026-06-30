@@ -149,7 +149,7 @@ module policyRequireTagsOnResources 'modules/policyAssignments.bicep' = [for tag
     policyDefinitionId: policyRequireTagOnResourcesId
     nonComplianceMessage: 'Missing required tag: ${tagName}'
     parameters: {
-      tag: {
+      tagName: {
         value: tagName
       }
     }

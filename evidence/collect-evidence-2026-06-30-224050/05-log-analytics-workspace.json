@@ -1,0 +1,32 @@
+﻿{
+  "createdDate": "2026-06-30T20:08:27.0296133Z",
+  "customerId": "9884580e-6274-46ca-a2fa-f8b01f95ab00",
+  "etag": "\"83000472-0000-0d00-0000-6a4425fb0000\"",
+  "features": {
+    "enableLogAccessUsingOnlyResourcePermissions": true
+  },
+  "id": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/rg-alz-dev-monitor/providers/Microsoft.OperationalInsights/workspaces/law-alz-dev",
+  "location": "westeurope",
+  "modifiedDate": "2026-06-30T20:24:27.1554169Z",
+  "name": "law-alz-dev",
+  "provisioningState": "Succeeded",
+  "publicNetworkAccessForIngestion": "Enabled",
+  "publicNetworkAccessForQuery": "Enabled",
+  "resourceGroup": "rg-alz-dev-monitor",
+  "retentionInDays": 30,
+  "sku": {
+    "lastSkuUpdate": "2026-06-30T20:08:27.0296133Z",
+    "name": "PerGB2018"
+  },
+  "tags": {
+    "CostCenter": "1001-LAB",
+    "Environment": "dev",
+    "Owner": "Sebastian"
+  },
+  "type": "Microsoft.OperationalInsights/workspaces",
+  "workspaceCapping": {
+    "dailyQuotaGb": 1.0,
+    "dataIngestionStatus": "RespectQuota",
+    "quotaNextResetTime": "2026-07-01T20:00:00Z"
+  }
+}

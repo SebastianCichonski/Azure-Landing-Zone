@@ -103,9 +103,7 @@ Generated: $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')
 | 08-rbac-assignments-scope.json | RBAC assignments visible at subscription scope |
 | 09-budget.json | Subscription budget configuration |
 
-## Manual screenshots to add
 
-Use the checklist in docs/evidence-pack.md and save screenshots in docs/screenshots or this evidence folder.
 "@ | Out-File -FilePath $summaryPath -Encoding utf8
 
 Write-Step 'Evidence collection completed'

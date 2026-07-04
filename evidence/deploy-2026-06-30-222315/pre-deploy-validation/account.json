@@ -1,0 +1,16 @@
+﻿{
+  "environmentName": "AzureCloud",
+  "homeTenantId": "d3f73b51-a38a-428b-9ca7-4d6a84425e8d",
+  "id": "ff185d28-34be-4e1b-8451-73bd3342973f",
+  "isDefault": true,
+  "managedByTenants": [],
+  "name": "Subs_ Azure1",
+  "state": "Enabled",
+  "tenantDefaultDomain": "sebquoutlook.onmicrosoft.com",
+  "tenantDisplayName": "Default Directory",
+  "tenantId": "d3f73b51-a38a-428b-9ca7-4d6a84425e8d",
+  "user": {
+    "name": "sebqu@outlook.com",
+    "type": "user"
+  }
+}

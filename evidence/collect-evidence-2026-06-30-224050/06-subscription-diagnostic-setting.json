@@ -1,0 +1,51 @@
+﻿{
+  "id": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/providers/microsoft.insights/diagnosticSettings/diag-alz-dev-sub-activity",
+  "location": "global",
+  "name": "diag-alz-dev-sub-activity",
+  "properties": {
+    "logs": [
+      {
+        "category": "Administrative",
+        "categoryGroup": null,
+        "enabled": true
+      },
+      {
+        "category": "Security",
+        "categoryGroup": null,
+        "enabled": true
+      },
+      {
+        "category": "Alert",
+        "categoryGroup": null,
+        "enabled": true
+      },
+      {
+        "category": "Policy",
+        "categoryGroup": null,
+        "enabled": true
+      },
+      {
+        "category": "ServiceHealth",
+        "categoryGroup": null,
+        "enabled": false
+      },
+      {
+        "category": "Recommendation",
+        "categoryGroup": null,
+        "enabled": false
+      },
+      {
+        "category": "Autoscale",
+        "categoryGroup": null,
+        "enabled": false
+      },
+      {
+        "category": "ResourceHealth",
+        "categoryGroup": null,
+        "enabled": false
+      }
+    ],
+    "workspaceId": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/rg-alz-dev-monitor/providers/Microsoft.OperationalInsights/workspaces/law-alz-dev"
+  },
+  "type": "Microsoft.Insights/diagnosticSettings"
+}

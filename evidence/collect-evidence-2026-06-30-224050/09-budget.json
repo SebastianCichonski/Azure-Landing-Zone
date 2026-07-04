@@ -1,0 +1,58 @@
+﻿{
+  "eTag": "\"1dd08ce75ca4d8a\"",
+  "id": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/providers/Microsoft.Consumption/budgets/bud-alz-dev",
+  "name": "bud-alz-dev",
+  "properties": {
+    "amount": 10.0,
+    "category": "Cost",
+    "currentSpend": {
+      "amount": 0.0,
+      "unit": "EUR"
+    },
+    "filter": {},
+    "notifications": {
+      "actual100": {
+        "contactEmails": [],
+        "contactGroups": [
+          "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/rg-alz-dev-monitor/providers/Microsoft.Insights/actionGroups/ag-alz-dev"
+        ],
+        "contactRoles": [],
+        "enabled": true,
+        "locale": "pl-pl",
+        "operator": "GreaterThanOrEqualTo",
+        "threshold": 100.0,
+        "thresholdType": "Actual"
+      },
+      "actual50": {
+        "contactEmails": [],
+        "contactGroups": [
+          "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/rg-alz-dev-monitor/providers/Microsoft.Insights/actionGroups/ag-alz-dev"
+        ],
+        "contactRoles": [],
+        "enabled": true,
+        "locale": "pl-pl",
+        "operator": "GreaterThanOrEqualTo",
+        "threshold": 50.0,
+        "thresholdType": "Actual"
+      },
+      "actual80": {
+        "contactEmails": [],
+        "contactGroups": [
+          "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/rg-alz-dev-monitor/providers/Microsoft.Insights/actionGroups/ag-alz-dev"
+        ],
+        "contactRoles": [],
+        "enabled": true,
+        "locale": "pl-pl",
+        "operator": "GreaterThanOrEqualTo",
+        "threshold": 80.0,
+        "thresholdType": "Actual"
+      }
+    },
+    "timeGrain": "Monthly",
+    "timePeriod": {
+      "endDate": "2026-12-31T23:59:59Z",
+      "startDate": "2026-06-01T00:00:00Z"
+    }
+  },
+  "type": "Microsoft.Consumption/budgets"
+}

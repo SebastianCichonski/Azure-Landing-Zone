@@ -1,0 +1,74 @@
+﻿[
+  {
+    "displayName": "Require tag on Resource Group (CostCenter)",
+    "name": "pa-alz-dev-req-tag-costcenter-rg",
+    "parameters": {
+      "tagName": {
+        "value": "CostCenter"
+      }
+    },
+    "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/96670d01-0a4d-4649-9c89-2d3abc0a5025"
+  },
+  {
+    "displayName": "Require tag on Resource Group (Owner)",
+    "name": "pa-alz-dev-req-tag-owner-rg",
+    "parameters": {
+      "tagName": {
+        "value": "Owner"
+      }
+    },
+    "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/96670d01-0a4d-4649-9c89-2d3abc0a5025"
+  },
+  {
+    "displayName": "Require tag on Resource Group (Environment)",
+    "name": "pa-alz-dev-req-tag-environment-rg",
+    "parameters": {
+      "tagName": {
+        "value": "Environment"
+      }
+    },
+    "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/96670d01-0a4d-4649-9c89-2d3abc0a5025"
+  },
+  {
+    "displayName": "Allowed Locations",
+    "name": "pa-alz-dev-allowed-locations",
+    "parameters": {
+      "listOfAllowedLocations": {
+        "value": [
+          "westeurope"
+        ]
+      }
+    },
+    "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/e56962a6-4747-49cd-b67b-bf8b01975c4c"
+  },
+  {
+    "displayName": "Require tag on resources (CostCenter)",
+    "name": "pa-alz-dev-req-tag-costcenter-res",
+    "parameters": {
+      "tagName": {
+        "value": "CostCenter"
+      }
+    },
+    "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/871b6d14-10aa-478d-b590-94f262ecfa99"
+  },
+  {
+    "displayName": "Require tag on resources (Environment)",
+    "name": "pa-alz-dev-req-tag-environment-res",
+    "parameters": {
+      "tagName": {
+        "value": "Environment"
+      }
+    },
+    "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/871b6d14-10aa-478d-b590-94f262ecfa99"
+  },
+  {
+    "displayName": "Require tag on resources (Owner)",
+    "name": "pa-alz-dev-req-tag-owner-res",
+    "parameters": {
+      "tagName": {
+        "value": "Owner"
+      }
+    },
+    "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/871b6d14-10aa-478d-b590-94f262ecfa99"
+  }
+]

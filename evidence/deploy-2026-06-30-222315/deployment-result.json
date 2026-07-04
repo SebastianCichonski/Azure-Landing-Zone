@@ -1,0 +1,252 @@
+﻿{
+  "id": "/subscriptions/ff185d28-34be-4e1b-8451-73bd3342973f/providers/Microsoft.Resources/deployments/alz-deploy-20260630-222315",
+  "location": "westeurope",
+  "name": "alz-deploy-20260630-222315",
+  "properties": {
+    "correlationId": "44ba7a76-e0e8-4264-9417-07a123eb420c",
+    "debugSetting": null,
+    "dependencies": [
+      {
+        "dependsOn": [
+          {
+            "id": "/subscriptions/ff185d28-34be-4e1b-8451-73bd3342973f/providers/Microsoft.Resources/deployments/rg-monitor",
+            "resourceName": "rg-monitor",
+            "resourceType": "Microsoft.Resources/deployments"
+          }
+        ],
+        "id": "/subscriptions/ff185d28-34be-4e1b-8451-73bd3342973f/resourceGroups/rg-alz-dev-monitor/providers/Microsoft.Resources/deployments/monitor-actionGroup",
+        "resourceGroup": "rg-alz-dev-monitor",
+        "resourceName": "monitor-actionGroup",
+        "resourceType": "Microsoft.Resources/deployments"
+      },
+      {
+        "dependsOn": [
+          {
+            "id": "/subscriptions/ff185d28-34be-4e1b-8451-73bd3342973f/resourceGroups/rg-alz-dev-monitor/providers/Microsoft.Resources/deployments/monitor-actionGroup",
+            "resourceGroup": "rg-alz-dev-monitor",
+            "resourceName": "monitor-actionGroup",
+            "resourceType": "Microsoft.Resources/deployments"
+          }
+        ],
+        "id": "/subscriptions/ff185d28-34be-4e1b-8451-73bd3342973f/providers/Microsoft.Resources/deployments/cost-budget",
+        "resourceName": "cost-budget",
+        "resourceType": "Microsoft.Resources/deployments"
+      },
+      {
+        "dependsOn": [
+          {
+            "id": "/subscriptions/ff185d28-34be-4e1b-8451-73bd3342973f/providers/Microsoft.Resources/deployments/rg-monitor",
+            "resourceName": "rg-monitor",
+            "resourceType": "Microsoft.Resources/deployments"
+          }
+        ],
+        "id": "/subscriptions/ff185d28-34be-4e1b-8451-73bd3342973f/resourceGroups/rg-alz-dev-monitor/providers/Microsoft.Resources/deployments/monitor-logAnalytics",
+        "resourceGroup": "rg-alz-dev-monitor",
+        "resourceName": "monitor-logAnalytics",
+        "resourceType": "Microsoft.Resources/deployments"
+      },
+      {
+        "dependsOn": [
+          {
+            "id": "/subscriptions/ff185d28-34be-4e1b-8451-73bd3342973f/resourceGroups/rg-alz-dev-monitor/providers/Microsoft.Resources/deployments/monitor-logAnalytics",
+            "resourceGroup": "rg-alz-dev-monitor",
+            "resourceName": "monitor-logAnalytics",
+            "resourceType": "Microsoft.Resources/deployments"
+          }
+        ],
+        "id": "/subscriptions/ff185d28-34be-4e1b-8451-73bd3342973f/providers/Microsoft.Resources/deployments/monitor-diag-activityLog",
+        "resourceName": "monitor-diag-activityLog",
+        "resourceType": "Microsoft.Resources/deployments"
+      }
+    ],
+    "duration": "PT42.5354881S",
+    "error": null,
+    "mode": "Incremental",
+    "onErrorDeployment": null,
+    "outputResources": [
+      {
+        "id": "/subscriptions/ff185d28-34be-4e1b-8451-73bd3342973f/providers/Microsoft.Authorization/policyAssignments/pa-alz-dev-allowed-locations"
+      },
+      {
+        "id": "/subscriptions/ff185d28-34be-4e1b-8451-73bd3342973f/providers/Microsoft.Authorization/policyAssignments/pa-alz-dev-req-tag-costcenter-res"
+      },
+      {
+        "id": "/subscriptions/ff185d28-34be-4e1b-8451-73bd3342973f/providers/Microsoft.Authorization/policyAssignments/pa-alz-dev-req-tag-costcenter-rg"
+      },
+      {
+        "id": "/subscriptions/ff185d28-34be-4e1b-8451-73bd3342973f/providers/Microsoft.Authorization/policyAssignments/pa-alz-dev-req-tag-environment-res"
+      },
+      {
+        "id": "/subscriptions/ff185d28-34be-4e1b-8451-73bd3342973f/providers/Microsoft.Authorization/policyAssignments/pa-alz-dev-req-tag-environment-rg"
+      },
+      {
+        "id": "/subscriptions/ff185d28-34be-4e1b-8451-73bd3342973f/providers/Microsoft.Authorization/policyAssignments/pa-alz-dev-req-tag-owner-res"
+      },
+      {
+        "id": "/subscriptions/ff185d28-34be-4e1b-8451-73bd3342973f/providers/Microsoft.Authorization/policyAssignments/pa-alz-dev-req-tag-owner-rg"
+      },
+      {
+        "id": "/subscriptions/ff185d28-34be-4e1b-8451-73bd3342973f/providers/Microsoft.Authorization/roleAssignments/31f2baf6-7058-51b8-8d8f-7f5bdf25e62b"
+      },
+      {
+        "id": "/subscriptions/ff185d28-34be-4e1b-8451-73bd3342973f/providers/Microsoft.Authorization/roleAssignments/35a18c14-2a54-52c7-b9cf-5ec4be4ab85a"
+      },
+      {
+        "id": "/subscriptions/ff185d28-34be-4e1b-8451-73bd3342973f/providers/Microsoft.Authorization/roleAssignments/731d5e4f-db83-5e22-9552-8f9f63ec56d8"
+      },
+      {
+        "id": "/subscriptions/ff185d28-34be-4e1b-8451-73bd3342973f/providers/Microsoft.Authorization/roleAssignments/9f21faa2-ee68-52cb-945e-2fb0ccb411cf"
+      },
+      {
+        "id": "/subscriptions/ff185d28-34be-4e1b-8451-73bd3342973f/providers/Microsoft.Consumption/budgets/bud-alz-dev"
+      },
+      {
+        "id": "/subscriptions/ff185d28-34be-4e1b-8451-73bd3342973f/providers/Microsoft.Insights/diagnosticSettings/diag-alz-dev-sub-activity"
+      },
+      {
+        "id": "/subscriptions/ff185d28-34be-4e1b-8451-73bd3342973f/resourceGroups/rg-alz-dev-monitor"
+      },
+      {
+        "id": "/subscriptions/ff185d28-34be-4e1b-8451-73bd3342973f/resourceGroups/rg-alz-dev-monitor/providers/Microsoft.Insights/actionGroups/ag-alz-dev",
+        "resourceGroup": "rg-alz-dev-monitor"
+      },
+      {
+        "id": "/subscriptions/ff185d28-34be-4e1b-8451-73bd3342973f/resourceGroups/rg-alz-dev-monitor/providers/Microsoft.OperationalInsights/workspaces/law-alz-dev",
+        "resourceGroup": "rg-alz-dev-monitor"
+      },
+      {
+        "id": "/subscriptions/ff185d28-34be-4e1b-8451-73bd3342973f/resourceGroups/rg-alz-dev-shared"
+      },
+      {
+        "id": "/subscriptions/ff185d28-34be-4e1b-8451-73bd3342973f/resourceGroups/rg-alz-dev-workloads"
+      }
+    ],
+    "outputs": null,
+    "parameters": {
+      "activityLogCategories": {
+        "type": "Array",
+        "value": [
+          "Administrative",
+          "Security",
+          "Alert",
+          "Policy"
+        ]
+      },
+      "alertEmailAddresses": {
+        "type": "Array",
+        "value": [
+          "sebqu@outlook.com"
+        ]
+      },
+      "budgetAmount": {
+        "type": "Int",
+        "value": 10
+      },
+      "budgetEndDate": {
+        "type": "String",
+        "value": "2026-12-31T23:59:59Z"
+      },
+      "budgetStartDate": {
+        "type": "String",
+        "value": "2026-06-01T00:00:00Z"
+      },
+      "commonTags": {
+        "type": "Object",
+        "value": {
+          "CostCenter": "1001-LAB",
+          "Environment": "dev",
+          "Owner": "Sebastian"
+        }
+      },
+      "environment": {
+        "type": "String",
+        "value": "dev"
+      },
+      "location": {
+        "type": "String",
+        "value": "westeurope"
+      },
+      "policyAllowedLocationsId": {
+        "type": "String",
+        "value": "/providers/Microsoft.Authorization/policyDefinitions/e56962a6-4747-49cd-b67b-bf8b01975c4c"
+      },
+      "policyRequireTagOnRGId": {
+        "type": "String",
+        "value": "/providers/Microsoft.Authorization/policyDefinitions/96670d01-0a4d-4649-9c89-2d3abc0a5025"
+      },
+      "policyRequireTagOnResourcesId": {
+        "type": "String",
+        "value": "/providers/Microsoft.Authorization/policyDefinitions/871b6d14-10aa-478d-b590-94f262ecfa99"
+      },
+      "projectName": {
+        "type": "String",
+        "value": "alz"
+      },
+      "rolesAudit": {
+        "type": "Array",
+        "value": [
+          "acdd72a7-3385-48ef-bd42-f606fba81ae7"
+        ]
+      },
+      "rolesDev": {
+        "type": "Array",
+        "value": [
+          "b24988ac-6180-42a0-ab88-20f7382dd24c"
+        ]
+      },
+      "rolesOps": {
+        "type": "Array",
+        "value": [
+          "73c42c96-874c-492b-b04d-ab87d138a893",
+          "43d0d8ad-25c7-4714-9337-8ba259a9fe05"
+        ]
+      },
+      "sgAuditId": {
+        "type": "String",
+        "value": "a5704b10-e51a-4079-91ac-c50bd0f07b30"
+      },
+      "sgDevId": {
+        "type": "String",
+        "value": "22180260-8d11-4b12-94c3-10908befe8ad"
+      },
+      "sgOpsId": {
+        "type": "String",
+        "value": "dcf69358-6cc2-449f-9776-4347252a9835"
+      }
+    },
+    "parametersLink": null,
+    "providers": [
+      {
+        "id": null,
+        "namespace": "Microsoft.Resources",
+        "providerAuthorizationConsentState": null,
+        "registrationPolicy": null,
+        "registrationState": null,
+        "resourceTypes": [
+          {
+            "aliases": null,
+            "apiProfiles": null,
+            "apiVersions": null,
+            "capabilities": null,
+            "defaultApiVersion": null,
+            "locationMappings": null,
+            "locations": [
+              null,
+              "westeurope"
+            ],
+            "properties": null,
+            "resourceType": "deployments",
+            "zoneMappings": null
+          }
+        ]
+      }
+    ],
+    "provisioningState": "Succeeded",
+    "templateHash": "5788223547578223264",
+    "templateLink": null,
+    "timestamp": "2026-06-30T20:24:56.741431+00:00",
+    "validatedResources": null
+  },
+  "tags": null,
+  "type": "Microsoft.Resources/deployments"
+}

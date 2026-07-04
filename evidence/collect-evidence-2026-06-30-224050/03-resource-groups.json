@@ -1,0 +1,29 @@
+﻿[
+  {
+    "location": "westeurope",
+    "name": "rg-alz-dev-monitor",
+    "tags": {
+      "CostCenter": "1001-LAB",
+      "Environment": "dev",
+      "Owner": "Sebastian"
+    }
+  },
+  {
+    "location": "westeurope",
+    "name": "rg-alz-dev-shared",
+    "tags": {
+      "CostCenter": "1001-LAB",
+      "Environment": "dev",
+      "Owner": "Sebastian"
+    }
+  },
+  {
+    "location": "westeurope",
+    "name": "rg-alz-dev-workloads",
+    "tags": {
+      "CostCenter": "1001-LAB",
+      "Environment": "dev",
+      "Owner": "Sebastian"
+    }
+  }
+]

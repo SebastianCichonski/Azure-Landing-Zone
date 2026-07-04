@@ -85,7 +85,7 @@ Generated: $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')
 ## Subscription
 
 - Name: $($account.name)
-- ID: $subId
+- ID: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
 - Project: $ProjectName
 - Environment: $Environment
 

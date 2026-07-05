@@ -96,19 +96,19 @@ Brak exemptions.
 **Kroki:**
 1. Utwórz zasób (np. storage) bez tagów
 2. Oczekiwany wynik: **Denied by policy**  
-**Dowód:** `docs/screenshots/07-deny-missing-tags.png`
+**Dowód:** `evidence/screenshots/07-deny-missing-tags.png`
 
 ### Test 2 — zła lokalizacja (Deny)
 **Kroki:**
 1. Spróbuj wdrożyć zasób w innym regionie niż `westeurope`
 2. Oczekiwany wynik: **Denied by policy**  
-**Dowód:** `docs/screenshots/08-deny-wrong-location.png`
+**Dowód:** `evidence/screenshots/08-deny-wrong-location.png`
 
 ### Test 3 — poprawne wdrożenie (Allowed)
 **Kroki:**
 1. Utwórz zasób w `westeurope` z tagami Owner/Environment/CostCenter
 2. Oczekiwany wynik: sukces  
-**Dowód:** `docs/screenshots/09-success-with-tags.png`
+**Dowód:** `evidence/screenshots/09-success-with-tags.png`
 
 ---
 

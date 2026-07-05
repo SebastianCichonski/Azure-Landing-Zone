@@ -211,8 +211,8 @@ Szczegółowy opis wdrożenia: `infra/README-deploy.md`
 
 Skrót:
 ```powershell
-pwsh ./scripts/validate.ps1 -Location westeurope -ParamsFile ./infra/environment/dev.bicepparaam
-pwsh ./scripts/deploy.ps1   -Location westeurope -ParamsFile ./infra/environment/dev.bicepparam
+pwsh ./scripts/validate.ps1 
+pwsh ./scripts/deploy.ps1   
 ```
 
 ---
@@ -240,7 +240,7 @@ pwsh ./scripts/deploy.ps1   -Location westeurope -ParamsFile ./infra/environment
 
 ## Sprzątanie (cleanup)
 ```powershell
-pwsh ./scripts/cleanup.ps1 -ProjectName <alz> -Environment <dev>
+pwsh ./scripts/cleanup.ps1 
 ```
 
 > Cleanup usuwa zasoby wdrożone przez projekt (w tym RG i elementy governance), aby ograniczyć koszty labu.
@@ -248,7 +248,7 @@ pwsh ./scripts/cleanup.ps1 -ProjectName <alz> -Environment <dev>
 ---
 
 ## Dowody (Evidence Pack)
-Wszystkie screeny: `docs/screenshots/`
+Wszystkie screeny: `evidence/screenshots/`
 
 Rekomendowany zestaw:
 - `01-rbac-subscription.png` — role assignments na subskrypcji
@@ -271,19 +271,20 @@ landing-zone/
 ├─ infra/
 │  ├─ main.bicep
 │  ├─ environments/
-│  │  ├─ prod.bicepparam
+│  │  ├─ prod.bicepparam (opcjonalnie)
 │  │  └─ dev.bicepparam
 │  ├─ modules/
 │  │  ├─ resourceGroup.bicep
 │  │  ├─ logAnalytics.bicep
 │  │  ├─ actionGroup.bicep
-│  │  ├─ activityLogDiagnostics.bicep
+│  │  ├─ diagnosticSettings.bicep
 │  │  ├─ budget.bicep
 │  │  ├─ policyAssignments.bicep
 │  │  └─ rbac.bicep
 │  └─ README-deploy.md
 ├─ scripts/
 │  ├─ deploy.ps1
+|  ├─ collect-evidence.ps1
 │  ├─ validate.ps1
 │  └─ cleanup.ps1
 ├─ docs/
@@ -293,7 +294,7 @@ landing-zone/
 │  ├─ screenshots/
 │  ├─ decisions.md
 │  ├─ policies.md
-│  ├─ iam.md
+│  ├─ rbac.md
 │  └─ test-results.md
 └─ CONTRIBUTING.md
 ```
@@ -303,7 +304,7 @@ landing-zone/
 ## Notatki i decyzje
 - Decyzje architektoniczne: `docs/decisions.md`
 - Polityki: `docs/policies.md`
-- IAM/RBAC: `docs/iam.md`
+- IAM/RBAC: `docs/rbac.md`
 - Wyniki testów: `docs/test-results.md`
 
 ---

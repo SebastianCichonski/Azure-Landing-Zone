@@ -174,7 +174,7 @@ Przy każdej zmianie IaC sprawdź:
 
 ---
 
-## 8. Examples from this repo
+## 8. Przykłady z repo
 
 Poniższe przykłady pokazują, jak standard jest używany w praktyce w tym repozytorium.
 
@@ -232,7 +232,7 @@ Przykłady:
 - `sg-alz-ops`
 - `sg-alz-dev`
   
-  ### 8.7 Examples: module instance naming in `main.bicep`
+### 8.7 Examples: module instance naming in `main.bicep`
 
 Instancje modułów w `infra/main.bicep` nazywamy w `camelCase`, opisowo, według wzorca:
 

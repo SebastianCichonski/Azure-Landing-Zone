@@ -109,7 +109,7 @@ Celem jest stworzenie powtarzalnego fundamentu (governance + monitoring + cost c
 
 **Polityki wdrażane w ALZ:**
 1) Allowed locations — `westeurope` — **Deny**
-2) Require tag on resources — `Owner`, `CostCenter` — **Deny**
+2) Require tag on resources — `Owner`,  `Environment`, `CostCenter` — **Deny**
 3) Require tag on resource groups — `Owner`, `Environment`, `CostCenter` — **Deny**
 4) (opcjonalnie) Require tag value — `Environment=dev` — **Deny/Audit** (zależnie od etapu)
 
@@ -138,7 +138,7 @@ Celem jest stworzenie powtarzalnego fundamentu (governance + monitoring + cost c
 
 ## 8. Cost controls
 
-**Budżet subskrypcji:** `50`  
+**Budżet subskrypcji:** `10`  
 **Progi alertów:** 50% / 80% / 100%  
 **Kanał powiadomień:** email (Action Group / bezpośrednio)
 
@@ -164,7 +164,7 @@ Celem jest stworzenie powtarzalnego fundamentu (governance + monitoring + cost c
 
 ## 10. Evidence pack (dowody)
 
-Wymagane artefakty w `docs/screenshots/`:
+Wymagane artefakty w `evidence/screenshots/`:
 - Policy assignments + compliance
 - Deny error (missing tags, wrong location)
 - Log Analytics + KQL results (AzureActivity)

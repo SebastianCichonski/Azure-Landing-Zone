@@ -35,9 +35,9 @@ Ten dokument opisuje model **Azure RBAC** wdrożony w projekcie **Azure Landing 
 
 | Grupa | Opis | Kto należy |
 |------|------|------------|
-| `sg-lz-audit` | audyt/odczyt | osoby audytu |
-| `sg-lz-ops` | monitoring i operacje | admin/ops |
-| `sg-lz-dev` | wdrożenia w labie | dev/test |
+| `sg-alz-audit` | audyt/odczyt | osoby audytu |
+| `sg-alz-ops` | monitoring i operacje | admin/ops |
+| `sg-alz-dev` | wdrożenia w labie | dev/test |
 
 **Wymagane dane wejściowe do IaC:**
 - `objectId` dla każdej grupy (GUID)
@@ -52,10 +52,10 @@ Ten dokument opisuje model **Azure RBAC** wdrożony w projekcie **Azure Landing 
 
 | Grupa | Rola (Azure RBAC) | Scope | Uzasadnienie |
 |------|--------------------|-------|--------------|
-| `sg-lz-audit` | Reader | Subscription | wgląd bez zmian |
-| `sg-lz-ops` | Monitoring Reader | Subscription | wgląd w metryki/alerty |
-| `sg-lz-ops` | Log Analytics Reader | Subscription | wykonywanie kwerend KQL |
-| `sg-lz-dev` | Contributor | Subscription | wdrożenia w labie (ograniczone przez Policy Deny) |
+| `sg-alz-audit` | Reader | Subscription | wgląd bez zmian |
+| `sg-alz-ops` | Monitoring Reader | Subscription | wgląd w metryki/alerty |
+| `sg-alz-ops` | Log Analytics Reader | Subscription | wykonywanie kwerend KQL |
+| `sg-alz-dev` | Contributor | Subscription | wdrożenia w labie (ograniczone przez Policy Deny) |
 
 ---
 
@@ -84,7 +84,7 @@ Dobre praktyki:
 
 ### 6.1 Portal
 1. Subscription → **Access control (IAM)** → **Role assignments**
-2. Filtr: `sg-lz-`
+2. Filtr: `sg-alz-`
 3. Sprawdź: role, scope = subscription, przypisania “Group”
 
 ### 6.2 Azure CLI
@@ -104,9 +104,7 @@ Get-AzRoleAssignment -Scope "/subscriptions/<SUB_ID>" | Where-Object {$_.ObjectT
 Zapisuj w `docs/screenshots/`:
 
 - `01-rbac-subscription.png` — subskrypcja → IAM → role assignments (grupy + role + scope)
-- `02-rbac-sg-lz-ops.png` — szczegóły przypisania dla `sg-lz-ops`
-- `03-rbac-sg-lz-dev.png` — szczegóły przypisania dla `sg-lz-dev`
-- `04-rbac-sg-lz-audit.png` — szczegóły przypisania dla `sg-lz-audit`
+
 
 ---
 

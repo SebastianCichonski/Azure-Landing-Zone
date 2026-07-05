@@ -11,7 +11,7 @@ param(
     [string] $ProjectName = 'alz',
     [string] $Environment = 'dev',
     [string] $SubscriptionId = '',
-    [string] $EvidencePath = "./evidence/collect-evidence-$(Get-Date -Format 'yyyy-MM-dd-HHmmss')"
+    [string] $EvidencePath = "./evidence/collect-evidence/collect-evidence-$(Get-Date -Format 'yyyy-MM-dd-HHmmss')"
 )
 
 Set-StrictMode -Version Latest

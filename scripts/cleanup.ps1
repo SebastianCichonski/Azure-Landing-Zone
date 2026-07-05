@@ -16,7 +16,7 @@ param(
     [switch] $RemoveRbac,
     [string[]] $PrincipalObjectIds = @(),
     [switch] $NoWait,
-    [string] $EvidencePath = "./evidence/cleanup-$(Get-Date -Format 'yyyy-MM-dd-HHmmss')"
+    [string] $EvidencePath = "./evidence/cleanup-evidence/cleanup-$(Get-Date -Format 'yyyy-MM-dd-HHmmss')"
 )
 
 Set-StrictMode -Version Latest

@@ -14,7 +14,7 @@ param(
     [string] $SubscriptionId = '',
     [string] $DeploymentName = "alz-deploy-$(Get-Date -Format 'yyyyMMdd-HHmmss')",
     [switch] $SkipValidate,
-    [string] $EvidencePath = "./evidence/deploy-$(Get-Date -Format 'yyyy-MM-dd-HHmmss')"
+    [string] $EvidencePath = "./evidence/deploy-evidence/deploy-$(Get-Date -Format 'yyyy-MM-dd-HHmmss')"
 )
 
 Set-StrictMode -Version Latest

@@ -85,12 +85,12 @@ flowchart TB
 Diagram pokazuje **Azure Landing Zone** w jednej subskrypcji powiązanej z Tenant/Entra ID. W subskrypcji mamy trzy Resource Groupy:
 
 - `rg-<project>-<env>-monitor`: centralny Log Analytics Workspace oraz Azure Monitor (alerty i action groups). Monitor “karmi” Log Analytics danymi.
-- `rg-<project>-<env>-shared`: zasoby wspólne — Key Vault i Managed Identities (tożsamości bez haseł); KV jest używany razem z MI.
+- `rg-<project>-<env>-shared`: zasoby wspólne — Key Vault i Managed Identities (tożsamości bez haseł); KV jest używany razem z MI (przyszły projekt).
 - `rg-<project>-<env>-workloads`: testowe zasoby (VM/App/Storage). Każdy zasób ma Diagnostic Settings, które wysyłają logi do Log Analytics.
 
 **Przepływy:**
 - Diagnostic settings → Log Analytics (centralne logowanie).
-- Workloads używają MI do dostępu (kropkowana linia “auth via MI”) i pobierają sekrety/certyfikaty z Key Vault.
+- Workloads używają MI do dostępu (kropkowana linia “auth via MI”) i pobierają sekrety/certyfikaty z Key Vault (przyszły projekt).
 - Na całość nałożone są Azure Policy/Initiatives oraz RBAC (kropkowane strzałki) — czyli governance i uprawnienia na poziomie subskrypcji.
 
 **Przepływ logów (high level):**
@@ -195,7 +195,7 @@ AzureActivity
 ---
 
 ## Kontrola kosztów
-- Budget: `15`
+- Budget: `10`
 - Progi alertów: 50% / 80% / 100%
 - Odbiorcy powiadomień: `owner@outlook.com`
 
@@ -262,6 +262,8 @@ Rekomendowany zestaw:
 - `09-success-with-tags.png` — sukces + tagi
 - `10-action-group.png` — Action Group
 - `11-budgets.png` — Budżet + progi
+- `12-deployment-success.png` — wdrożenia Bicep na subskrypcji
+- `13-resource-groups-overview.png` — struktura grup zasobów
 
 ---
 
@@ -271,32 +273,32 @@ landing-zone/
 ├─ infra/
 │  ├─ main.bicep
 │  ├─ environments/
-│  │  ├─ prod.bicepparam (opcjonalnie)
 │  │  └─ dev.bicepparam
-│  ├─ modules/
-│  │  ├─ resourceGroup.bicep
-│  │  ├─ logAnalytics.bicep
-│  │  ├─ actionGroup.bicep
-│  │  ├─ diagnosticSettings.bicep
-│  │  ├─ budget.bicep
-│  │  ├─ policyAssignments.bicep
-│  │  └─ rbac.bicep
-│  └─ README-deploy.md
+│  └─ modules/
+│     ├─ resourceGroup.bicep
+│     ├─ logAnalytics.bicep
+│     ├─ actionGroup.bicep
+│     ├─ diagnosticSettings.bicep
+│     ├─ budget.bicep
+│     ├─ policyAssignments.bicep
+│     └─ rbac.bicep
 ├─ scripts/
 │  ├─ deploy.ps1
-|  ├─ collect-evidence.ps1
 │  ├─ validate.ps1
-│  └─ cleanup.ps1
+│  ├─ cleanup.ps1
+│  └─ collect-evidence.ps1
 ├─ docs/
 │  ├─ diagrams/
-│  │  ├─ landing-zone-lite.drawio
-│  │  └─ landing-zone-lite.png
-│  ├─ screenshots/
 │  ├─ decisions.md
+│  ├─ naming.md
 │  ├─ policies.md
 │  ├─ rbac.md
-│  └─ test-results.md
-└─ CONTRIBUTING.md
+│  └─ CONTRIBUTING.md
+└─ evidence/
+   ├─ screenshots/
+   ├─ deploy-evidence/
+   ├─ cleanup-evidence/
+   └─ collect-evidence/
 ```
 
 ---

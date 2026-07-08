@@ -62,8 +62,11 @@ Ten dokument opisuje model **Azure RBAC** wdrożony w projekcie **Azure Landing 
 ## 5) Implementacja w IaC (Bicep)
 
 ### 5.1 Parametry
-W `infra/params/<env>.bicepparam` trzymasz:
-- `rbacAssignments`: lista przypisań (principalId + roleDefinitionGuid + principalType)
+W `infra/environments/dev.bicepparam` przekazywane są:
+- `sgAuditId`, `sgOpsId`, `sgDevId` — Object ID grup Entra ID,
+- `rolesAudit`, `rolesOps`, `rolesDev` — tablice GUID-ów ról Azure RBAC.
+
+Moduł `rbac.bicep` tworzy role assignments w pętli dla każdej roli przypisanej do danej grupy.
 
 Przykład struktury (opisowo):
 - `principalId`: objectId grupy Entra ID

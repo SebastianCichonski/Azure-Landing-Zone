@@ -1,4 +1,4 @@
-# Evidence Pack — Azure Landing Zone Lite
+# Evidence Pack — Azure Landing Zone
 
 Zestaw zrzutów ekranu potwierdzających poprawne wdrożenie i działanie podstawowych elementów Azure Landing Zone. Dane wrażliwe, takie jak adres e-mail, identyfikatory subskrypcji, workspace ID oraz wybrane identyfikatory zasobów, zostały zanonimizowane.
 

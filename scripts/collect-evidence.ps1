@@ -63,7 +63,7 @@ Invoke-AzEvidence -Arguments @('deployment', 'sub', 'list', '--query', "[?contai
 
 Write-Step 'Collect resource groups and resources'
 Invoke-AzEvidence -Arguments @('group', 'list', '--query', "[?starts_with(name, 'rg-$ProjectName-$Environment-')].{name:name, location:location, tags:tags}", '--output', 'json') -OutFile (Join-Path $EvidencePath '03-resource-groups.json') -IgnoreErrors
-Invoke-AzEvidence -Arguments @('resource', 'list', '--tag', "Project=$ProjectName", '--output', 'json') -OutFile (Join-Path $EvidencePath '04-resources-by-project-tag.json') -IgnoreErrors
+Invoke-AzEvidence -Arguments @('resource', 'list', '--tag', "Environment=$ProjectName", '--output', 'json') -OutFile (Join-Path $EvidencePath '04-resources-by-project-tag.json') -IgnoreErrors
 
 Write-Step 'Collect monitoring evidence'
 Invoke-AzEvidence -Arguments @('monitor', 'log-analytics', 'workspace', 'show', '--resource-group', $monitorRg, '--workspace-name', $lawName, '--output', 'json') -OutFile (Join-Path $EvidencePath '05-log-analytics-workspace.json') -IgnoreErrors

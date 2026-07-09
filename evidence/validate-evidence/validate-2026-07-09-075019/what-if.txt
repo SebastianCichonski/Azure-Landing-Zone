@@ -1,0 +1,40 @@
+﻿Note: The result may contain false positive predictions (noise).
+You can help us improve the accuracy of the result by opening an issue here: https://aka.ms/WhatIfIssues
+
+Resource and property changes are indicated with these symbols:
+  ! Deploy
+  * Ignore
+
+The deployment will update the following scopes
+
+Scope: /subscriptions/ff185d28-34be-4e1b-8451-73bd3342973f
+
+  ! Microsoft.Authorization/policyAssignments/pa-alz-dev-allowed-locations
+  ! Microsoft.Authorization/policyAssignments/pa-alz-dev-req-tag-costcenter-res
+  ! Microsoft.Authorization/policyAssignments/pa-alz-dev-req-tag-costcenter-rg
+  ! Microsoft.Authorization/policyAssignments/pa-alz-dev-req-tag-environment-res
+  ! Microsoft.Authorization/policyAssignments/pa-alz-dev-req-tag-environment-rg
+  ! Microsoft.Authorization/policyAssignments/pa-alz-dev-req-tag-owner-res
+  ! Microsoft.Authorization/policyAssignments/pa-alz-dev-req-tag-owner-rg
+  ! Microsoft.Authorization/roleAssignments/31f2baf6-7058-51b8-8d8f-7f5bdf25e62b
+  ! Microsoft.Authorization/roleAssignments/35a18c14-2a54-52c7-b9cf-5ec4be4ab85a
+  ! Microsoft.Authorization/roleAssignments/731d5e4f-db83-5e22-9552-8f9f63ec56d8
+  ! Microsoft.Authorization/roleAssignments/9f21faa2-ee68-52cb-945e-2fb0ccb411cf
+  ! Microsoft.Consumption/budgets/bud-alz-dev
+  ! Microsoft.Insights/diagnosticSettings/diag-alz-dev-sub-activity
+  ! resourceGroups/rg-alz-dev-monitor
+  ! resourceGroups/rg-alz-dev-shared
+  ! resourceGroups/rg-alz-dev-workloads
+
+Scope: /subscriptions/ff185d28-34be-4e1b-8451-73bd3342973f/resourceGroups/rg-alz-dev-monitor
+
+  ! Microsoft.Insights/actionGroups/ag-alz-dev
+  ! Microsoft.OperationalInsights/workspaces/law-alz-dev
+
+Scope: /subscriptions/ff185d28-34be-4e1b-8451-73bd3342973f/resourceGroups/rg-alz-dev-workloads
+
+  * Microsoft.Storage/storageAccounts/stalzok27542
+  * Microsoft.Storage/storageAccounts/stalzok42745
+  * Microsoft.Storage/storageAccounts/stalzok63285
+
+Resource changes: 18 to deploy, 3 to ignore.

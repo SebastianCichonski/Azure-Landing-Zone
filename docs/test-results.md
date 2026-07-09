@@ -65,28 +65,10 @@ Walidacja kończy się bez błędów.
 `PASS`
 
 **Dowód:**  
-`docs/screenshots/<plik-lub-output-z-walidacji>`
+`evidence/validate-evidence/<pliki-lub-outputy-z-walidacji>`
 
 ---
 
-### PRE-02 – What-if
-
-**Opis:**  
-Sprawdzenie planowanych zmian przed wdrożeniem.
-
-**Oczekiwany wynik:**
-
-- widoczne są tylko zasoby należące do projektu,
-- brak nieoczekiwanych modyfikacji,
-- brak przypadkowego usuwania zasobów.
-
-**Wynik rzeczywisty:**  
-`PASS`
-
-**Dowód:**  
-`docs/screenshots/<plik-lub-output-what-if>`
-
----
 
 ### DEP-01 – Deployment
 
@@ -106,7 +88,7 @@ Deployment kończy się powodzeniem.
 `PASS`
 
 **Dowód:**  
-`docs/screenshots/<plik-lub-output-deployment>`
+`evidence/deploy-evidence/<pliki-lub-outputy-deployment>`
 
 ---
 
@@ -132,7 +114,7 @@ Operacja została odrzucona.
 `PASS`
 
 **Dowód:**  
-`docs/screenshots/07-deny-missing-tags.png`
+`evidence/screenshots/07-deny-missing-tags.png`
 
 ---
 
@@ -157,7 +139,7 @@ Operacja została odrzucona.
 `PASS`
 
 **Dowód:**  
-`docs/screenshots/08-deny-wrong-location.png`
+`evidence/screenshots/08-deny-wrong-location.png`
 
 ---
 
@@ -182,7 +164,7 @@ Zasób został utworzony poprawnie.
 `PASS`
 
 **Dowód:**  
-`docs/screenshots/09-success-with-tags.png`
+`evidence/screenshots/09-success-with-tags.png`
 
 ---
 
@@ -216,7 +198,7 @@ Zdarzenia są widoczne w Log Analytics.
 `PASS`
 
 **Dowód:**  
-`docs/screenshots/04-kql-azureactivity.png`
+`evidence/screenshots/04-kql-azureactivity.png`
 
 ---
 
@@ -263,11 +245,4 @@ Zweryfikowano:
 
 ---
 
-## 9. Decyzja końcowa
 
-| Kryterium | Decyzja |
-|---|---|
-| Walidacja techniczna zakończona poprawnie | YES |
-| Testy z README.md wykonane | YES |
-| Evidence Pack zebrany | YES |
-| Projekt gotowy do publikacji / prezentacji | YES |

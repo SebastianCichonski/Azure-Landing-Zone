@@ -104,7 +104,7 @@ Get-AzRoleAssignment -Scope "/subscriptions/<SUB_ID>" | Where-Object {$_.ObjectT
 
 ## 7) Evidence pack (screeny)
 
-Zapisuj w `docs/screenshots/`:
+Zapisuj w `evidence/screenshots/`:
 
 - `01-rbac-subscription.png` — subskrypcja → IAM → role assignments (grupy + role + scope)
 

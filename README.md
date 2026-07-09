@@ -286,7 +286,8 @@ landing-zone/
 │  ├─ deploy.ps1
 │  ├─ validate.ps1
 │  ├─ cleanup.ps1
-│  └─ collect-evidence.ps1
+|  ├─ collect-evidence.ps1
+│  └─ README-deploy.md
 ├─ docs/
 │  ├─ diagrams/
 │  ├─ decisions.md

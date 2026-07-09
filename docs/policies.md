@@ -126,7 +126,7 @@ Brak exemptions.
 
 ## 9) Evidence pack (screeny)
 
-Zapisuj w `docs/screenshots/`:
+Zapisuj w `evidence/screenshots/`:
 
 - `05-policy-assignments.png` — lista przypisań (scope: subscription)
 - `06-policy-compliance.png` — compliance

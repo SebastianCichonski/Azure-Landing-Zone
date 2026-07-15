@@ -2,56 +2,56 @@
   {
     "principalName": "e6f4583f-f7bc-495f-9437-c5e461d4e012",
     "role": "Reader",
-    "scope": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+    "scope": "/subscriptions/<SUBSCRIPTION_ID>"
   },
   {
     "principalName": "Bjorn@sebquoutlook.onmicrosoft.com",
     "role": "Reader",
-    "scope": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+    "scope": "/subscriptions/<SUBSCRIPTION_ID>"
   },
   {
     "principalName": "ssmith@sebquoutlook.onmicrosoft.com",
     "role": "Resource Policy Contributor",
-    "scope": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+    "scope": "/subscriptions/<SUBSCRIPTION_ID>"
   },
   {
     "principalName": "GG-AZ104-Admins",
     "role": "Reader",
-    "scope": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+    "scope": "/subscriptions/<SUBSCRIPTION_ID>"
   },
   {
     "principalName": "",
     "role": "Contributor",
-    "scope": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+    "scope": "/subscriptions/<SUBSCRIPTION_ID>"
   },
   {
     "principalName": "az104.lab.reader@sebquoutlook.onmicrosoft.com",
     "role": "Reader",
-    "scope": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+    "scope": "/subscriptions/<SUBSCRIPTION_ID>"
   },
   {
     "principalName": "",
     "role": "Contributor",
-    "scope": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+    "scope": "/subscriptions/<SUBSCRIPTION_ID>"
   },
   {
     "principalName": "sg-alz-dev",
     "role": "Contributor",
-    "scope": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+    "scope": "/subscriptions/<SUBSCRIPTION_ID>"
   },
   {
     "principalName": "sg-alz-ops",
     "role": "Monitoring Reader",
-    "scope": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+    "scope": "/subscriptions/<SUBSCRIPTION_ID>"
   },
   {
     "principalName": "sg-alz-ops",
     "role": "Log Analytics Reader",
-    "scope": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+    "scope": "/subscriptions/<SUBSCRIPTION_ID>"
   },
   {
     "principalName": "sg-alz-audit",
     "role": "Reader",
-    "scope": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+    "scope": "/subscriptions/<SUBSCRIPTION_ID>"
   }
 ]

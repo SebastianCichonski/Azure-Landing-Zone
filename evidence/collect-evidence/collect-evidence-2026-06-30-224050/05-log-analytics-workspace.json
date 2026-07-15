@@ -5,7 +5,7 @@
   "features": {
     "enableLogAccessUsingOnlyResourcePermissions": true
   },
-  "id": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/rg-alz-dev-monitor/providers/Microsoft.OperationalInsights/workspaces/law-alz-dev",
+  "id": "/subscriptions/<SUBSCRIPTION_ID>/resourceGroups/rg-alz-dev-monitor/providers/Microsoft.OperationalInsights/workspaces/law-alz-dev",
   "location": "westeurope",
   "modifiedDate": "2026-06-30T20:24:27.1554169Z",
   "name": "law-alz-dev",

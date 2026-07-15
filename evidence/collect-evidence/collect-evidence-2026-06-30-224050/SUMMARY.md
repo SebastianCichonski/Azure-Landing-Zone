@@ -5,7 +5,7 @@ Generated: 2026-06-30 22:41:13
 ## Subscription
 
 * Name: Subs\_ Azure1
-* ID: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+* ID: <SUBSCRIPTION_ID>
 * Project: alz
 * Environment: dev
 

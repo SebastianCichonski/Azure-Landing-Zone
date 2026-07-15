@@ -1,6 +1,6 @@
 ﻿{
   "eTag": "\"1dd08ce75ca4d8a\"",
-  "id": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/providers/Microsoft.Consumption/budgets/bud-alz-dev",
+  "id": "/subscriptions/<SUBSCRIPTION_ID>/providers/Microsoft.Consumption/budgets/bud-alz-dev",
   "name": "bud-alz-dev",
   "properties": {
     "amount": 10.0,
@@ -14,7 +14,7 @@
       "actual100": {
         "contactEmails": [],
         "contactGroups": [
-          "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/rg-alz-dev-monitor/providers/Microsoft.Insights/actionGroups/ag-alz-dev"
+          "/subscriptions/<SUBSCRIPTION_ID>/resourceGroups/rg-alz-dev-monitor/providers/Microsoft.Insights/actionGroups/ag-alz-dev"
         ],
         "contactRoles": [],
         "enabled": true,
@@ -26,7 +26,7 @@
       "actual50": {
         "contactEmails": [],
         "contactGroups": [
-          "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/rg-alz-dev-monitor/providers/Microsoft.Insights/actionGroups/ag-alz-dev"
+          "/subscriptions/<SUBSCRIPTION_ID>/resourceGroups/rg-alz-dev-monitor/providers/Microsoft.Insights/actionGroups/ag-alz-dev"
         ],
         "contactRoles": [],
         "enabled": true,
@@ -38,7 +38,7 @@
       "actual80": {
         "contactEmails": [],
         "contactGroups": [
-          "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/rg-alz-dev-monitor/providers/Microsoft.Insights/actionGroups/ag-alz-dev"
+          "/subscriptions/<SUBSCRIPTION_ID>/resourceGroups/rg-alz-dev-monitor/providers/Microsoft.Insights/actionGroups/ag-alz-dev"
         ],
         "contactRoles": [],
         "enabled": true,

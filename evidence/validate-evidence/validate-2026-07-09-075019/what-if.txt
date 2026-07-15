@@ -7,7 +7,7 @@ Resource and property changes are indicated with these symbols:
 
 The deployment will update the following scopes
 
-Scope: /subscriptions/ff185d28-34be-4e1b-8451-73bd3342973f
+Scope: /subscriptions/<SUBSCRIPTION_ID>
 
   ! Microsoft.Authorization/policyAssignments/pa-alz-dev-allowed-locations
   ! Microsoft.Authorization/policyAssignments/pa-alz-dev-req-tag-costcenter-res
@@ -26,12 +26,12 @@ Scope: /subscriptions/ff185d28-34be-4e1b-8451-73bd3342973f
   ! resourceGroups/rg-alz-dev-shared
   ! resourceGroups/rg-alz-dev-workloads
 
-Scope: /subscriptions/ff185d28-34be-4e1b-8451-73bd3342973f/resourceGroups/rg-alz-dev-monitor
+Scope: /subscriptions/<SUBSCRIPTION_ID>/resourceGroups/rg-alz-dev-monitor
 
   ! Microsoft.Insights/actionGroups/ag-alz-dev
   ! Microsoft.OperationalInsights/workspaces/law-alz-dev
 
-Scope: /subscriptions/ff185d28-34be-4e1b-8451-73bd3342973f/resourceGroups/rg-alz-dev-workloads
+Scope: /subscriptions/<SUBSCRIPTION_ID>/resourceGroups/rg-alz-dev-workloads
 
   * Microsoft.Storage/storageAccounts/stalzok27542
   * Microsoft.Storage/storageAccounts/stalzok42745

@@ -59,10 +59,6 @@ Przykłady:
 - Krótko i konkretnie (najlepiej **<= 72 znaki**)
 - Bez kropki na końcu
 
-### Breaking changes (opcjonalnie)
-Jeśli zmiana jest “łamliwa” (np. zmieniasz nazwę parametru w `main.bicep`), dodaj `!`:
-- `feat(infra)!: zmień nazwę parametru environment na env`
-
 ---
 
 ## 2) Nazewnictwo branchy
@@ -88,7 +84,6 @@ Przykłady:
 - [ ] `az bicep build` przechodzi (brak błędów składni)
 - [ ] `az deployment sub what-if ...` działa
 - [ ] Deployment jest idempotentny (ponowne uruchomienie nie psuje wdrożenia)
-- [ ] Wszystkie zasoby mają tagi z obiektu `tags` (tam gdzie to ma sens)
 - [ ] Nazwy zasobów zgodne z `docs/decisions.md`
 - [ ] Scopes są poprawne (subscription vs resource group)
 
@@ -97,11 +92,6 @@ Przykłady:
 - [ ] Jeśli decyzja architektoniczna się zmieniła → aktualizuj `docs/decisions.md`
 - [ ] Jeśli zmieniono governance → aktualizuj `docs/policies.md`
 - [ ] Jeśli zmiana wpływa na działanie “widoczne w portalu” → dodaj/aktualizuj screeny
-
-### Koszty i higiena labu
-- [ ] Diagnostyka i logi są minimalne (nie “zalewasz” LA)
-- [ ] Retencja ustawiona sensownie (np. 30 dni)
-- [ ] Dla nowych zasobów istnieje ścieżka sprzątania (`scripts/cleanup.ps1`)
 
 ---
 
@@ -146,7 +136,7 @@ Przykładowe wzorce:
 ## 6) Polityka “evidence pack” (screeny)
 
 Wszystkie screeny trzymamy w:
-- `docs/screenshots/`
+- `evidence/screenshots/`
 
 Zasady:
 - Numeruj rosnąco: `01-...`, `02-...`
@@ -161,16 +151,3 @@ Rekomendowane dowody:
 - Budżet + konfiguracja alertów
 - RBAC (role assignments na subskrypcji)
 
----
-
-## 7) Krótka notatka “co/po co/jak sprawdzić”
-
-Dla zmian wpływających na architekturę/governance dopisz (w opisie PR lub w body commita):
-- **Co zmieniono?**
-- **Dlaczego?**
-- **Jak zweryfikować?**
-
-Przykład:
-- **Co:** tag policies przełączone z Audit na Deny  
-- **Dlaczego:** wymuszenie guardrails governance  
-- **Jak sprawdzić:** spróbuj utworzyć Storage bez tagów → oczekuj Deny
